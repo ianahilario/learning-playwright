@@ -1,9 +1,10 @@
 # Setup
 ## First time to code?
-- Download VSCode editor
-- Install VSCode Git add-on
-- Install Homebrew ((If using MacOs M* series, user their .pkg file and follow the instructions at the end)
-- Install Git
+- Download VSCode editor: https://code.visualstudio.com/download
+- Install VSCode Git add-on: https://code.visualstudio.com/docs/sourcecontrol/github
+- Install Homebrew: https://brew.sh/ (If using MacOs M* series, use their .pkg file and follow the instructions at the end of the installation to upate `PATH`)
+- Install Git: https://git-scm.com/download/mac
+- Install VSCode Playwright add-on: https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright
 
 ## Installing Playwright
 - Follow their instruction here: https://playwright.dev/docs/intro
