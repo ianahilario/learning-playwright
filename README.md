@@ -17,3 +17,8 @@
 - `git commit -m "your commit message"` - commits your changes to the current branch
 - `git push` - pushes your changes to the branch
 - `git pull origin main` - gets the latest changes from the main branch and merges it with your current branch
+
+## Playwright - Stage 1
+- [Writing tests](https://playwright.dev/docs/writing-tests)
+- [Locators](https://playwright.dev/docs/locators)
+- [Assertions](https://playwright.dev/docs/test-assertions)
