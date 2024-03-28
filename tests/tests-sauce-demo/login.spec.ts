@@ -1,8 +1,7 @@
-import { test, expect } from '@playwright/test';
-import { LoginPage } from '../../pages/login.page';
+import { expect } from '@playwright/test';
+const { test } = require('../../base/testBase');
 
-test('able to login successfully', async ({ page }) => {
-    const loginPage = new LoginPage(page);
+test('able to login successfully', async ({page, loginPage }) => {
     await test.step(`go to homepage`, async () => {
         await loginPage.goToLoginPage();
     });
@@ -16,8 +15,7 @@ test('able to login successfully', async ({ page }) => {
     });
 });
 
-test('able to show errror when login fails', async ({ page }) => {
-    const loginPage = new LoginPage(page);
+test('able to show errror when login fails', async ({page, loginPage }) => {
     await test.step(`go to homepage`, async () => {
         await loginPage.goToLoginPage();
     });
@@ -27,7 +25,6 @@ test('able to show errror when login fails', async ({ page }) => {
     });
 
     await test.step(`verify that an error is displayed in the page`, async () => {
-
         await expect(page, "User is still in the login page").toHaveURL('https://www.saucedemo.com/');
         await expect(page.locator('//h3[@data-test="error"]')).toHaveText('Epic sadface: Sorry, this user has been locked out.');
     });
