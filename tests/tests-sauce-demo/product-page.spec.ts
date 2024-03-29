@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-const { test } = require('../../base/testBase');
+const { test } = require('../../fixtures/testBase');
 
 test.describe('View product details', () => {
     test('should show same product details in Listing and Details', {tag: '@p1'},  async ({page }) => {

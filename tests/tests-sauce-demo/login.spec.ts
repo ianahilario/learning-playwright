@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-const { test } = require('../../base/testBase');
+const { test } = require('../../fixtures/testBase');
 
 test('should login successfully', {tag: '@p1'}, async ({page, loginPage }) => {
     await test.step(`go to homepage`, async () => {

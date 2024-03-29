@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-const { test } = require('../../base/testBase');
+const { test } = require('../../fixtures/testBase');
 
 
 test.describe('Checkout', () => {
