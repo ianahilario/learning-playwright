@@ -7,7 +7,7 @@ test('should login successfully', {tag: '@p1'}, async ({page, loginPage }) => {
     });
 
     await test.step(`submit login credentials`, async () => {
-        await loginPage.submitLogin("standard_user", "secret_sauce");
+        await loginPage.submitLogin(process.env.USER_STANDARD_USERNAME, process.env.USER_STANDARD_PASSWORD);
     });
 
     await test.step(`verify that user is able to login successfully`, async () => {
@@ -21,7 +21,7 @@ test('should show errror when login fails', async ({page, loginPage }) => {
     });
 
     await test.step(`submit login credentials`, async () => {
-        await loginPage.submitLogin("locked_out_user", "secret_sauce");
+        await loginPage.submitLogin(process.env.USER_LOCKED_USERNAME, process.env.USER_LOCKED_PASSWORD);
     });
 
     await test.step(`verify that an error is displayed in the page`, async () => {
