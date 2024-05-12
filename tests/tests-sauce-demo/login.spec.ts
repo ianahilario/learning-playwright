@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 const { test } = require('../../fixtures/testBase');
 
-test('should login successfully', {tag: '@p1'}, async ({page, loginPage }) => {
+test('should login successfully', {tag: '@p1'}, async ({page, loginPage, productListingPage }) => {
     await test.step(`go to homepage`, async () => {
         await loginPage.goToLoginPage();
     });
@@ -11,7 +11,7 @@ test('should login successfully', {tag: '@p1'}, async ({page, loginPage }) => {
     });
 
     await test.step(`verify that user is able to login successfully`, async () => {
-        await expect(page, "User is in the homepage").toHaveURL('https://www.saucedemo.com/inventory.html');
+        await productListingPage.isCorrectPage();
     });
 });
 
