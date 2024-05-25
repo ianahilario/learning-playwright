@@ -19,7 +19,9 @@ test('should checkout the cart item successfully', {tag: '@p1'},  async ({page, 
         productItem1 = await productListingPage.getProductData();
         productItem2 = await productListingPage.getProductData(1);
 
+        await header.isCorrectShoppingCartBadge(0);
         await productListingPage.cartItem.addItemToCartbyIndex();
+        await header.isCorrectShoppingCartBadge(1);
         await productListingPage.cartItem.addItemToCartbyIndex(1);
         await header.isCorrectShoppingCartBadge(2);
     });

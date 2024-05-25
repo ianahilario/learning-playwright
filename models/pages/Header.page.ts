@@ -2,6 +2,8 @@ import {Page, Locator, expect} from '@playwright/test'
 
 export class HeaderPage{
     readonly page:Page;
+    readonly burgerMenuButton : Locator;
+    readonly burgerMenu : Locator;
     readonly shoppingCartIcon : Locator;
     readonly shoppingCartBadge : Locator;
     readonly loginButton : Locator;
@@ -10,11 +12,22 @@ export class HeaderPage{
         this.page = page;
         this.shoppingCartIcon = this.page.locator('//a[@data-test="shopping-cart-link"]');
         this.shoppingCartBadge = this.page.locator('//span[@data-test="shopping-cart-badge"]');
+        this.burgerMenuButton = this.page.locator('//button[@id="react-burger-menu-btn"]');
+        this.burgerMenu = this.page.locator('//div[@class="bm-menu"]');
     }
 
     //Navigation
     async goToShoppingCartPage(){
         await this.shoppingCartIcon.click();
+    }
+
+    async goToLogout(){
+        await this.gotoBurgerMenuLinks('Logout');
+    }
+
+    private async gotoBurgerMenuLinks(linkText : string){
+        await this.burgerMenuButton.click();
+        await this.burgerMenu.locator(`//a[text()="${linkText}"]`).click();
     }
 
     //Assertion

@@ -6,18 +6,24 @@ export class CartPage{
     readonly page:Page;
     readonly pageTitle : Locator;
     readonly checkoutButton : Locator;
+    readonly continueShoppingButton : Locator;
     readonly cartItem : CartItemComponent;
 
     constructor(page: Page){
         this.page = page;
         this.pageTitle = this.page.locator('//span[@data-test="title"]');
         this.checkoutButton = this.page.locator('//button[@data-test="checkout"]');
+        this.continueShoppingButton = this.page.locator('//button[@data-test="continue-shopping"]');
         this.cartItem = new CartItemComponent(page);
     }
 
     //Navigation
     async gotoCartCheckoutPage(){
         await this.checkoutButton.click();
+    }
+
+    async gotoContinueShopping(){
+        await this.continueShoppingButton.click();
     }
 
     //Assertion

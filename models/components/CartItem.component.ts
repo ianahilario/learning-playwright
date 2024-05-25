@@ -18,13 +18,20 @@ export class CartItemComponent{
         this.productName = this.page.locator('//div[@data-test="inventory-item-name"]')
         this.productDescription = this.page.locator('//div[@data-test="inventory-item-desc"]')
         this.productPrice = this.page.locator('//div[@data-test="inventory-item-price"]')
-        this.addtoCartButton = this.page.locator('//button[starts-with(@data-test,"add-to-cart-")]')
-        this.removetoCartButton = this.page.locator('//button[starts-with(@data-test,"remove-")]')
+        this.addtoCartButton = this.page.locator('//button[starts-with(@data-test,"add-to-cart")]')
+        this.removetoCartButton = this.page.locator('//button[starts-with(@data-test,"remove")]')
     }
 
-    async isCorrectProductData(productData:Product, verifyImage:boolean, isItemAddedToCart?:boolean,){
-        let productItem = this.cartItem.filter({has: this.productName.filter({hasText: productData.name})});
-        await expect.soft(productItem, `Product '${productData.name}' is displayed`).toBeVisible(productData.name);
+    async isCorrectProductData(productData:Product, verifyImage:boolean, isItemAddedToCart?:boolean, expectedIndex?:number){
+        let productItem : Locator;
+        if(expectedIndex !== undefined){
+            productItem = await this.cartItem.nth(expectedIndex);
+            await expect.soft(productItem, `Product '${productData.name}' is displayed in expected index=${expectedIndex}`).toBeVisible(productData.name);
+        }
+        else{
+            productItem = await this.getProductItemLocator(productData);
+            await expect.soft(productItem, `Product '${productData.name}' is displayed`).toBeVisible(productData.name);
+        }
 
         if(verifyImage){
             await expect.soft(productItem.locator(this.productImage), "Correct product image").toHaveAttribute('src', productData.imageUrl);
@@ -52,14 +59,21 @@ export class CartItemComponent{
         await expect.soft(productItem.locator(this.addtoCartButton), "'Add to cart' button is no longer displayed").not.toBeVisible();
     }
 
-    async removeItemToCartbyIndex(productIndex?:number){
-        let productItem = productIndex === undefined ?
-            this.cartItem.first() 
-            :
-            this.cartItem.nth(productIndex);
+    async removeItemToCartbyProduct(productData:Product, isRemoveFromCartpage?:boolean){
+        let productItem = await this.getProductItemLocator(productData);
 
         await productItem.locator(this.removetoCartButton).click();
-        await expect.soft(productItem.locator(this.addtoCartButton), "'Add to cart' button is displayed because item is removed from cart").toBeVisible();
-        await expect.soft(productItem.locator(this.removetoCartButton), "'Remove' button is no longer displayed").not.toBeVisible();
+
+        if(isRemoveFromCartpage){
+            await expect.soft(productItem, `Cart item for product '${productData.name}' is removed`).not.toBeVisible();
+        }
+        else{
+            await expect.soft(productItem.locator(this.addtoCartButton), "'Add to cart' button is displayed because item is removed from cart").toBeVisible();
+            await expect.soft(productItem.locator(this.removetoCartButton), "'Remove' button is no longer displayed").not.toBeVisible();
+        }
+    }
+
+    private async getProductItemLocator(productData:Product){
+        return this.cartItem.filter({has: this.productName.filter({hasText: productData.name})});
     }
 }
