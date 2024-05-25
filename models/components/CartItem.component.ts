@@ -41,10 +41,14 @@ export class CartItemComponent{
         await expect.soft(productItem.locator(this.productPrice), "Correct product price").toHaveText(productData.price);
 
         if(isItemAddedToCart !==undefined){
-            isItemAddedToCart ? 
-            await expect.soft(productItem.locator(this.removetoCartButton), "'Remove' button is displayed because item is added to cart").toBeVisible()
-            :
-            await expect.soft(productItem.locator(this.addtoCartButton), "'Add to cart' button is displayed because item is not yet added to cart").not.toBeVisible();
+            if(isItemAddedToCart){
+                await expect.soft(productItem.locator(this.removetoCartButton), "'Remove' button is displayed because item is added to cart").toBeVisible()
+                await expect.soft(productItem.locator(this.addtoCartButton), "'Add to cart' button is not displayed").not.toBeVisible()
+            }
+            else{
+                await expect.soft(productItem.locator(this.addtoCartButton), "'Add to cart' button is displayed because item is not yet added to cart").toBeVisible();
+                await expect.soft(productItem.locator(this.removetoCartButton), "'Remove' button is not displayed").not.toBeVisible()
+            }
         }
     }
 
