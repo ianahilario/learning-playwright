@@ -4,6 +4,9 @@ const { HeaderPage } = require('../models/pages/Header.page');
 const { ProductListingPage } = require('../models/pages/ProductListing.page');
 const { ProductDetailsPage } = require('../models/pages/ProductDetails.page');
 const { CartPage } = require('../models/pages/Cart.page');
+const { CartCheckoutPage } = require('../models/pages/CartCheckout.page');
+const { CartReviewPage } = require('../models/pages/CartReview.page');
+const { CartConfirmationPage } = require('../models/pages/CartConfirmation.page');
 
 exports.test = base.test.extend({
     loginPage: async ({ page }, use) => {
@@ -20,6 +23,15 @@ exports.test = base.test.extend({
     },
     cartPage: async ({ page }, use) => {
         await use(new CartPage(page));
+    },
+    cartCheckoutPage: async ({ page }, use) => {
+        await use(new CartCheckoutPage(page));
+    },
+    cartReviewPage: async ({ page }, use) => {
+        await use(new CartReviewPage(page));
+    },
+    cartConfirmationPage: async ({ page }, use) => {
+        await use(new CartConfirmationPage(page));
     }
 });
 exports.expect = base.expect;
