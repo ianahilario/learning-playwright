@@ -8,13 +8,13 @@ export class HeaderPage{
 
     constructor(page: Page){
         this.page = page;
-        this.shoppingCartIcon = this.page.locator('//input[@data-test="shopping-cart-link"]');
-        this.shoppingCartBadge = this.page.locator('//input[@data-test="shopping-cart-badge"]');
+        this.shoppingCartIcon = this.page.locator('//a[@data-test="shopping-cart-link"]');
+        this.shoppingCartBadge = this.page.locator('//span[@data-test="shopping-cart-badge"]');
     }
 
     //Navigation
     async goToShoppingCartPage(){
-        await this.page.goto('https://www.saucedemo.com/')
+        await this.shoppingCartIcon.click();
     }
 
     //Assertion
@@ -22,6 +22,7 @@ export class HeaderPage{
         expectedCartQuantity === 0 ? 
             await expect(this.shoppingCartBadge, "Shopping cart badge is not displayed when qty=0").not.toBeVisible()
             :
+            await expect(this.shoppingCartBadge, "Shopping cart badge is displayed").toBeVisible()
             await expect(this.shoppingCartBadge, "Shopping cart badge shows correct quantity").toHaveText(`${expectedCartQuantity}`);
     }
 

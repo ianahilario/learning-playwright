@@ -1,19 +1,33 @@
 import {Page, Locator, expect} from '@playwright/test'
 import {Product} from '../data/dataObjects'
+import { CartItemComponent } from '../components/CartItem.component';
 
 export class ProductListingPage{
     readonly page:Page;
     readonly pageTitle : Locator;
     readonly products : Locator;
     readonly sortDropdown : Locator;
+    readonly cartItem : CartItemComponent;
 
     constructor(page: Page){
         this.page = page;
         this.pageTitle = this.page.locator('//span[@data-test="title"]');
         this.products = this.page.locator('//div[@data-test="inventory-item"]')
         this.sortDropdown = this.page.locator('//select[@data-test="product-sort-container"]')
+        this.cartItem = new CartItemComponent(page);
     }
 
+    //Navigation
+    async goToDetailsPage(index?:number){
+        if(index===undefined){
+            this.products.nth(0).locator('//a/img').click();
+        }
+        else{
+            this.products.nth(index).locator('//a/img').click();
+        }
+    }
+
+    //Assertions
     async isCorrectPage(){
         await expect(this.page).toHaveURL('https://www.saucedemo.com/inventory.html');
         await expect(this.page).toHaveTitle('Swag Labs');
@@ -84,7 +98,7 @@ export class ProductListingPage{
         
     }
         
-
+    //Getter
     async getProductData(index?:number) : Promise<Product>{
         let productLocator : Locator;
         let productData : Product;
@@ -106,14 +120,7 @@ export class ProductListingPage{
         return productData;
     }
 
-    async goToDetailsPage(index?:number){
-        if(index===undefined){
-            this.products.nth(0).locator('//a/img').click();
-        }
-        else{
-            this.products.nth(index).locator('//a/img').click();
-        }
-    }
+    
 
     
 }

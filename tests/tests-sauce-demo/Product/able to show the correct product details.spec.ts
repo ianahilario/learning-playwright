@@ -18,7 +18,7 @@ test('should show same product details in Listing and Details', {tag: '@p1'},  a
     await test.step(`same details are displayed in Listing and Details page`, async () => {
         await productListingPage.goToDetailsPage();
         await productDetailsPage.isCorrectPage();
-        await productDetailsPage.cartItem.isCorrectProductData(product, false);
+        await productDetailsPage.cartItem.isCorrectProductData(product, false, true);
     });
 });
 
