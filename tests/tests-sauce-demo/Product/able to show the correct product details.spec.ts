@@ -31,13 +31,11 @@ test('should be able to go back to Listing page via "Back to products" link"',  
 
     await test.step(`go to Details page`, async () => {
         await productListingPage.goToDetailsPage();
-
         await productDetailsPage.isCorrectPage();
     });
 
     await test.step(`go to back Listing page using breadcrumb link`, async () => {
         await productDetailsPage.goBackToListingPage();
-
-    await productListingPage.isCorrectPage();
+        await productListingPage.isCorrectPage();
     });
 });
