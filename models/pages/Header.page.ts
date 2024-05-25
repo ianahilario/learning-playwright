@@ -19,11 +19,13 @@ export class HeaderPage{
 
     //Assertion
     async isCorrectShoppingCartBadge(expectedCartQuantity:number){
-        expectedCartQuantity === 0 ? 
-            await expect(this.shoppingCartBadge, "Shopping cart badge is not displayed when qty=0").not.toBeVisible()
-            :
-            await expect(this.shoppingCartBadge, "Shopping cart badge is displayed").toBeVisible()
+        if(expectedCartQuantity===0){
+            await expect(this.shoppingCartBadge, "Shopping cart badge is not displayed when qty=0").not.toBeVisible();
+        }
+        else{
+            await expect(this.shoppingCartBadge, "Shopping cart badge is displayed").toBeVisible();
             await expect(this.shoppingCartBadge, "Shopping cart badge shows correct quantity").toHaveText(`${expectedCartQuantity}`);
+        }            
     }
 
     //Getter

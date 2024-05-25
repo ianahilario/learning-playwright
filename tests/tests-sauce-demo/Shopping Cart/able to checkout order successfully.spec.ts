@@ -50,7 +50,7 @@ test('should checkout the cart item successfully', {tag: '@p1'},  async ({page, 
         await cartReviewPage.isCorrectPage();
     });
 
-    await test.step(`verify order details is correct`, async () => {
+    await test.step(`order details are correct`, async () => {
         await cartReviewPage.isCorrectOrderDetails(shoppingCartData);
     });
 
@@ -59,23 +59,21 @@ test('should checkout the cart item successfully', {tag: '@p1'},  async ({page, 
         await cartConfirmationPage.isCorrectPage();
     });
 
+    await test.step(`order is confirmed`, async () => {
+        await cartConfirmationPage.isOrderConfirmed();
+    });
+
     await test.step(`go to back to homepage`, async () => {
         await cartConfirmationPage.gotoHomepage();
         await productListingPage.isCorrectPage();
     });
-    
 
-    //Proceed to shopping cart
-        //save cart item info
-        //get expected total price
-
-    //Shopping cart details
-
-    //Shopping cart review
-
-    //Shopping cart complete
-
-    //Cart is cleared
-
+    await test.step(`cart is cleared`, async () => {
+        await header.isCorrectShoppingCartBadge(0);
+        
+        await header.goToShoppingCartPage();
+        await cartPage.isCorrectPage();
+        await cartPage.isCartEmpty();
+    });
 });
 
