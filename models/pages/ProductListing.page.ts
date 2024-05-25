@@ -1,5 +1,5 @@
 import {Page, Locator, expect} from '@playwright/test'
-import {Product} from '../utils/dataObjects'
+import {Product} from '../data/dataObjects'
 
 export class ProductListingPage{
     readonly page:Page;
@@ -89,18 +89,15 @@ export class ProductListingPage{
         let productLocator : Locator;
         let productData : Product;
 
-        if(index===undefined){
-            productLocator = await this.products.nth(0);
-        }
-        else{
-            productLocator = await this.products.nth(index);
-        }
+        index===undefined ?  productLocator = await this.products.nth(0) : productLocator = await this.products.nth(index);;
 
+        const productImage = await productLocator.locator('//img[@class="inventory_item_img"]').getAttribute("src");
         const productName = await productLocator.locator('//div[@data-test="inventory-item-name"]').textContent();
         const productDescription = await productLocator.locator('//div[@data-test="inventory-item-desc"]').textContent();
         const productPrice = await productLocator.locator('//div[@data-test="inventory-item-price"]').textContent();
         
         productData = {
+            imageUrl: productImage,
             name: productName,
             description: productDescription,
             price: productPrice

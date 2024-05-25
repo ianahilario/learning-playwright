@@ -1,5 +1,4 @@
 import { expect } from '@playwright/test';
-import { Product } from '../../../utils/dataObjects';
 const { test } = require('../../../fixtures/testBase');
 
 test('should show correct sort options and sorts correctly',  async ({page, loginPage, productListingPage }) => {
