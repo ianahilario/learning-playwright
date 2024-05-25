@@ -7,5 +7,5 @@ export type Product = {
 
 export type ShoppingCart = {
     products: Array<Product>;
-    totalPrice: any;
+    subTotalPrice: number;
 }

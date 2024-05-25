@@ -22,7 +22,7 @@ export class CartItemComponent{
         this.removetoCartButton = this.page.locator('//button[starts-with(@data-test,"remove-")]')
     }
 
-    async isCorrectProductData(productData:Product, isItemAddedToCart:boolean, verifyImage:boolean){
+    async isCorrectProductData(productData:Product, verifyImage:boolean, isItemAddedToCart?:boolean,){
         let productItem = this.cartItem.filter({has: this.productName.filter({hasText: productData.name})});
         await expect.soft(productItem, `Product '${productData.name}' is displayed`).toBeVisible(productData.name);
 
@@ -33,10 +33,12 @@ export class CartItemComponent{
         await expect.soft(productItem.locator(this.productDescription), "Correct product description").toHaveText(productData.description);
         await expect.soft(productItem.locator(this.productPrice), "Correct product price").toHaveText(productData.price);
 
-        isItemAddedToCart ? 
+        if(isItemAddedToCart !==undefined){
+            isItemAddedToCart ? 
             await expect.soft(productItem.locator(this.removetoCartButton), "'Remove' button is displayed because item is added to cart").toBeVisible()
             :
             await expect.soft(productItem.locator(this.addtoCartButton), "'Add to cart' button is displayed because item is not yet added to cart").not.toBeVisible();
+        }
     }
 
     async addItemToCartbyIndex(productIndex?:number){

@@ -1,10 +1,12 @@
 import { expect } from '@playwright/test';
+import { ShoppingCart } from '../../../models/data/dataObjects';
 const { test } = require('../../../fixtures/testBase');
 
 
 test('should checkout the cart item successfully', {tag: '@p1'},  async ({page, loginPage, header, productListingPage, cartPage, cartCheckoutPage, cartReviewPage, cartConfirmationPage }) => {
     let productItem1;
     let productItem2;
+    let shoppingCartData : ShoppingCart;
 
     await test.step(`go to homepage`, async () => {
         await loginPage.goToLoginPage();
@@ -28,8 +30,10 @@ test('should checkout the cart item successfully', {tag: '@p1'},  async ({page, 
     });
 
     await test.step(`added products are displayed in cart`, async () => {
-        await cartPage.cartItem.isCorrectProductData(productItem1, true, false);
-        await cartPage.cartItem.isCorrectProductData(productItem2, true, false);
+        await cartPage.cartItem.isCorrectProductData(productItem1, false, true);
+        await cartPage.cartItem.isCorrectProductData(productItem2, false, true);
+
+        shoppingCartData = await cartPage.getShoppingCartData([productItem1, productItem2])
     });
 
     await test.step(`go to Cart - Checkout page`, async () => {
@@ -44,6 +48,10 @@ test('should checkout the cart item successfully', {tag: '@p1'},  async ({page, 
     await test.step(`go to Cart - Review page`, async () => {
         await cartCheckoutPage.gotoCartReviewPage();
         await cartReviewPage.isCorrectPage();
+    });
+
+    await test.step(`verify order details is correct`, async () => {
+        await cartReviewPage.isCorrectOrderDetails(shoppingCartData);
     });
 
     await test.step(`go to Cart - Confirmation page`, async () => {
