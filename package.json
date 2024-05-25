@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test --ui"
+    "test": "npx playwright test --ui",
+    "test-problem-user": "USER_USERNAME=problem_user npx playwright test --ui",
+    "test-performance-glitch-user": "USER_USERNAME=performance_glitch_user npx playwright test --ui",
+    "test-error-user": "USER_USERNAME=error_user npx playwright test --ui"
   },
   "keywords": [],
   "author": "",

@@ -64,7 +64,7 @@ export class ProductListingPage{
             for (let index = 0; index < productCount; index++) {
                 let value : any;
                 value = await this.products.nth(index).locator(locator).textContent();
-                await expect(value, `Correctly sorted by ${sortOption}`).toBe(productNames[index]);
+                await expect.soft(value, `Correctly sorted by ${sortOption}`).toBe(productNames[index]);
             }
         }
         else if(sortOption.includes("Price")){
@@ -91,7 +91,7 @@ export class ProductListingPage{
             for (let index = 0; index < productCount; index++) {
                 let value : any;
                 value = await this.products.nth(index).locator(locator).textContent();
-                await expect(value, `Correctly sorted by ${sortOption}`).toBe(`$${productPrice[index]}`);
+                await expect.soft(value, `Correctly sorted by ${sortOption}`).toBe(`$${productPrice[index]}`);
             }
         }
 
@@ -120,7 +120,4 @@ export class ProductListingPage{
         return productData;
     }
 
-    
-
-    
 }
