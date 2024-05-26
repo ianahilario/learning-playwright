@@ -38,23 +38,24 @@ exports.test = base.test.extend({
 
 //Hooks
 test.afterEach(async ({request}, testInfo,) => {
+    if(process.env.CREATE_JIRA_BUG_TICKET==="true"){
+        const JIRA_URL = `${process.env.JIRA_WEBHOOK_URL}`;
+        const testFilePath = `${JSON.stringify(testInfo.titlePath[0]).replace(/['"]+/g, '')}`;
+        const body = {
+            testPath: `${testFilePath}`,
+            testId: `${testInfo.testId}`,
+            summary: `AUT: ${testFilePath} > ${testInfo.title}`,
+            description: `${JSON.stringify(testInfo.errors)}`,
+            status: testInfo.status
+        }
 
-    const JIRA_URL = `${process.env.JIRA_WEBHOOK_URL}`;
-    const testFilePath = `${JSON.stringify(testInfo.titlePath[0]).replace(/['"]+/g, '')}`;
-    const body = {
-        testPath: `${testFilePath}`,
-        testId: `${testInfo.testId}`,
-        summary: `AUT: ${testFilePath} > ${testInfo.title}`,
-        description: `${JSON.stringify(testInfo.errors)}`,
-        status: testInfo.status
+        const apiRequest = await request.post(JIRA_URL, {
+            headers: { 'Content-Type': 'application/json' },
+            data: body
+        }).then(async (response: APIResponse) => {
+            console.log(`JIRA Webhook Response Status: ${await response.status()}`);
+            console.log(`JIRA Webhook Response Body: ${await JSON.stringify(response.body())}`);
+        }); 
     }
-
-    const apiRequest = await request.post(JIRA_URL, {
-        headers: { 'Content-Type': 'application/json' },
-        data: body
-    }).then(async (response: APIResponse) => {
-        console.log(`JIRA Webhook Response Status: ${await response.status()}`);
-        console.log(`JIRA Webhook Response Body: ${await JSON.stringify(response.body())}`);
-    }); 
 })
 
