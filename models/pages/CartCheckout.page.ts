@@ -1,4 +1,5 @@
 import {Page, Locator, expect} from '@playwright/test'
+import { faker } from '@faker-js/faker';
 
 export class CartCheckoutPage{
     readonly page:Page;
@@ -31,8 +32,8 @@ export class CartCheckoutPage{
 
     //Action
     async fillCheckoutForm(){
-        await this.firstNameField.fill("Jihyo");
-        await this.lastNameField.fill("Park");
-        await this.postalCodeField.fill("0201");
+        await this.firstNameField.fill(faker.person.firstName());
+        await this.lastNameField.fill(faker.person.lastName());
+        await this.postalCodeField.fill(faker.location.zipCode());
     }
 }
