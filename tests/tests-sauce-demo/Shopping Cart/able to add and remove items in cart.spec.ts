@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-const { test } = require('../../../fixtures/testBase');
+import { test } from '../../../fixtures/testBase';
 
 test.describe('Add/remove cart items', () => {
     test('should allow to add/remove from the Product Listing page', {tag: '@p1'},  async ({page, loginPage, header, productListingPage, cartPage}) => {
@@ -8,7 +8,7 @@ test.describe('Add/remove cart items', () => {
 
         await test.step(`go to homepage`, async () => {
             await loginPage.goToLoginPage();
-            await loginPage.submitLogin(process.env.USER_USERNAME, process.env.USER_PASSWORD);
+            await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
             await productListingPage.isCorrectPage();
         });
         
@@ -56,7 +56,7 @@ test.describe('Add/remove cart items', () => {
 
         await test.step(`go to homepage`, async () => {
             await loginPage.goToLoginPage();
-            await loginPage.submitLogin(process.env.USER_USERNAME, process.env.USER_PASSWORD);
+            await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
             await productListingPage.isCorrectPage();
         });
         
@@ -118,7 +118,7 @@ test.describe('Add/remove cart items', () => {
 
         await test.step(`go to homepage`, async () => {
             await loginPage.goToLoginPage();
-            await loginPage.submitLogin(process.env.USER_USERNAME, process.env.USER_PASSWORD);
+            await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
             await productListingPage.isCorrectPage();
         });
         
@@ -160,7 +160,7 @@ test.describe('Add/remove cart items', () => {
 
         await test.step(`go to homepage`, async () => {
             await loginPage.goToLoginPage();
-            await loginPage.submitLogin(process.env.USER_USERNAME, process.env.USER_PASSWORD);
+            await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
             await productListingPage.isCorrectPage();
         });
         

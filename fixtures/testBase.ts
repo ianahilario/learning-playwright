@@ -1,15 +1,27 @@
-const base = require('@playwright/test');
-import { APIResponse, request, test } from '@playwright/test'
-const { LoginPage } = require('../models/pages/Login.page');
-const { HeaderPage } = require('../models/pages/Header.page');
-const { ProductListingPage } = require('../models/pages/ProductListing.page');
-const { ProductDetailsPage } = require('../models/pages/ProductDetails.page');
-const { CartPage } = require('../models/pages/Cart.page');
-const { CartCheckoutPage } = require('../models/pages/CartCheckout.page');
-const { CartReviewPage } = require('../models/pages/CartReview.page');
-const { CartConfirmationPage } = require('../models/pages/CartConfirmation.page');
+import { test as base } from '@playwright/test';
+import { APIResponse } from '@playwright/test'
+import { LoginPage } from '../models/pages/Login.page';
+import { HeaderPage } from '../models/pages/Header.page';
+import { ProductListingPage } from '../models/pages/ProductListing.page';
+import { ProductDetailsPage } from '../models/pages/ProductDetails.page';
+import { CartPage } from '../models/pages/Cart.page';
+import { CartCheckoutPage } from '../models/pages/CartCheckout.page';
+import { CartReviewPage } from '../models/pages/CartReview.page';
+import { CartConfirmationPage } from '../models/pages/CartConfirmation.page';
 
-exports.test = base.test.extend({
+
+export type testFixtures = {
+    loginPage: LoginPage;
+    header: HeaderPage;
+    productListingPage: ProductListingPage;
+    productDetailsPage: ProductDetailsPage;
+    cartPage: CartPage;
+    cartCheckoutPage: CartCheckoutPage;
+    cartReviewPage: CartReviewPage;
+    cartConfirmationPage: CartConfirmationPage;
+};
+
+export const test = base.extend<testFixtures>({
     loginPage: async ({ page }, use) => {
         await use(new LoginPage(page));
     },

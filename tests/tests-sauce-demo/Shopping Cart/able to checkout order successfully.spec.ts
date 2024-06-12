@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { ShoppingCart } from '../../../models/data/dataObjects';
-const { test } = require('../../../fixtures/testBase');
+import { test } from '../../../fixtures/testBase';
 
 
 test('should checkout the cart item successfully', {tag: '@p1'},  async ({page, loginPage, header, productListingPage, cartPage, cartCheckoutPage, cartReviewPage, cartConfirmationPage }) => {
@@ -10,7 +10,7 @@ test('should checkout the cart item successfully', {tag: '@p1'},  async ({page, 
 
     await test.step(`go to homepage`, async () => {
         await loginPage.goToLoginPage();
-        await loginPage.submitLogin(process.env.USER_USERNAME, process.env.USER_PASSWORD);
+        await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
         await productListingPage.isCorrectPage();
     });
     

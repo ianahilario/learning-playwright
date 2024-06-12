@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-const { test } = require('../../../fixtures/testBase');
+import { test } from '../../../fixtures/testBase';
 
 test('should show errror when login fails', async ({page, loginPage }) => {
     await test.step(`go to homepage`, async () => {
@@ -7,7 +7,7 @@ test('should show errror when login fails', async ({page, loginPage }) => {
     });
 
     await test.step(`submit login credentials`, async () => {
-        await loginPage.submitLogin(process.env.USER_LOCKED_USERNAME, process.env.USER_LOCKED_PASSWORD);
+        await loginPage.submitLogin(`${process.env.USER_LOCKED_USERNAME}`, `${process.env.USER_LOCKED_PASSWORD}`);
     });
 
     await test.step(`verify that an error is displayed in the page`, async () => {

@@ -1,13 +1,13 @@
 import { expect } from '@playwright/test';
 import { Product } from '../../../models/data/dataObjects';
-const { test } = require('../../../fixtures/testBase');
+import { test } from '../../../fixtures/testBase';
 
 test('should show same product details in Listing and Details', {tag: '@p1'},  async ({page, loginPage, productListingPage, productDetailsPage }) => {
     let product : Product;
 
     await test.step(`go to homepage`, async () => {
         await loginPage.goToLoginPage();
-        await loginPage.submitLogin(process.env.USER_USERNAME, process.env.USER_PASSWORD);
+        await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
         await productListingPage.isCorrectPage();
     });
 
@@ -25,7 +25,7 @@ test('should show same product details in Listing and Details', {tag: '@p1'},  a
 test('should be able to go back to Listing page via "Back to products" link"',  async ({page, loginPage, productListingPage, productDetailsPage }) => {
     await test.step(`go to homepage`, async () => {
         await loginPage.goToLoginPage();
-        await loginPage.submitLogin(process.env.USER_STANDARD_USERNAME, process.env.USER_STANDARD_PASSWORD);
+        await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
         await productListingPage.isCorrectPage();
     });
 

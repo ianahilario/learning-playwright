@@ -1,4 +1,4 @@
-const { test } = require('../../../fixtures/testBase');
+import { test } from '../../../fixtures/testBase';
 
 test('should persist cart item when user logs out', {tag: '@p1'},  async ({page, loginPage, header, productListingPage, cartPage }) => {
     let productItem1;
@@ -6,7 +6,7 @@ test('should persist cart item when user logs out', {tag: '@p1'},  async ({page,
     
     await test.step(`go to homepage`, async () => {
         await loginPage.goToLoginPage();
-        await loginPage.submitLogin(process.env.USER_STANDARD_USERNAME, process.env.USER_STANDARD_PASSWORD);
+        await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
         await productListingPage.isCorrectPage();
     });
     
@@ -33,7 +33,7 @@ test('should persist cart item when user logs out', {tag: '@p1'},  async ({page,
     await test.step(`log out then log in again`, async () => {
         await header.goToLogout();
 
-        await loginPage.submitLogin(process.env.USER_USERNAME, process.env.USER_PASSWORD);
+        await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
         await productListingPage.isCorrectPage();
     });
 
