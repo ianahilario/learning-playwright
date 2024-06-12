@@ -9,8 +9,7 @@ import { CartCheckoutPage } from '../models/pages/CartCheckout.page';
 import { CartReviewPage } from '../models/pages/CartReview.page';
 import { CartConfirmationPage } from '../models/pages/CartConfirmation.page';
 
-
-export type testFixtures = {
+type testFixtures = {
     loginPage: LoginPage;
     header: HeaderPage;
     productListingPage: ProductListingPage;
