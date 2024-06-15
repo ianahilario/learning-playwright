@@ -8,6 +8,7 @@ on:
         options: 
         - smoke
         - full
+run-name: Run test-suite=${{ github.event.inputs.test-suite }} by @${{ github.actor }}
 env:
   USER_USERNAME: ${{ secrets.USER_USERNAME }}
   USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
