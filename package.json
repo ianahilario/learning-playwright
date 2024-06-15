@@ -7,7 +7,9 @@
     "test": "npx playwright test --ui",
     "test-problem-user": "USER_USERNAME=problem_user npx playwright test --ui",
     "test-performance-glitch-user": "USER_USERNAME=performance_glitch_user npx playwright test --ui",
-    "test-error-user": "USER_USERNAME=error_user npx playwright test --ui"
+    "test-error-user": "USER_USERNAME=error_user npx playwright test --ui",
+    "test-smoke": "npx playwright test --project=smoke --project=smoke-mobile --ui",
+    "test-full": "npx playwright test --project=full-chrome --project=full-firefox --project=full-safari --ui"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +20,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
-    "@playwright/test": "^1.42.1",
+    "@playwright/test": "^1.44.1",
     "@types/node": "^20.11.30"
   }
 }

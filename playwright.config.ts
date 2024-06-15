@@ -33,23 +33,35 @@ export default defineConfig({
     // baseURL: 'http://127.0.0.1:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: 'on',
   },
 
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: 'chromium',
+    { name: 'smoke',
+      grep: [/@p1/],
+      use: {
+        ...devices['Desktop Chrome'],
+        video: 'on'
+      },
+    },
+    { name: 'smoke-mobile',
+      grep: [/@p1/],
+      use: { 
+        ...devices['iPhone 14'],
+        "isMobile": true,
+        video: 'on'
+      },
+    },
+    { name: 'full-chrome',
       use: { ...devices['Desktop Chrome'] },
     },
 
-    {
-      name: 'firefox',
+    { name: 'full-firefox',
       use: { ...devices['Desktop Firefox'] },
     },
 
-    {
-      name: 'webkit',
+    { name: 'full-safari',
       use: { ...devices['Desktop Safari'] },
     },
 

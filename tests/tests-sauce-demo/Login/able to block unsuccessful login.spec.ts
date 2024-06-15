@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/testBase';
 
-test('should show errror when login fails', async ({page, loginPage }) => {
+test('should show errror when login fails', async ({page, loginPage}) => {
     await test.step(`go to homepage`, async () => {
         await loginPage.goToLoginPage();
     });
