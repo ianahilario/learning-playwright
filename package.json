@@ -9,7 +9,7 @@
     "test-performance-glitch-user": "USER_USERNAME=performance_glitch_user npx playwright test --ui",
     "test-error-user": "USER_USERNAME=error_user npx playwright test --ui",
     "test-smoke": "npx playwright test --project=smoke --project=smoke-mobile --ui",
-    "test-smoke-ci": "npx playwright test --project=smoke --project=smoke-mobile --max-failures=3",
+    "test-smoke-ci": "npx playwright test --project=smoke --project=smoke-mobile",
     "test-full": "npx playwright test --project=full-chrome --project=full-firefox --project=full-safari --ui"
   },
   "keywords": [],
