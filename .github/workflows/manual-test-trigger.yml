@@ -8,6 +8,7 @@ on:
         options: 
         - smoke
         - full
+        - visual
 run-name: Run test-suite=${{ github.event.inputs.test-suite }} by @${{ github.actor }}
 env:
   USER_USERNAME: ${{ secrets.USER_USERNAME }}
@@ -36,6 +37,9 @@ jobs:
     - name: Run full tests
       if: ${{ github.event.inputs.test-suite == 'full' }}
       run: npm run test-full-ci
+    - name: Run visual tests
+      if: ${{ github.event.inputs.test-suite == 'visual' }}
+      run: npm run test-visual-ci
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:

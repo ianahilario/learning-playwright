@@ -41,6 +41,7 @@ export default defineConfig({
   projects: [
     { name: 'smoke',
       grep: [/@p1/],
+      grepInvert: [/@visual/],
       use: {
         ...devices['Desktop Chrome'],
         video: 'on'
@@ -48,6 +49,7 @@ export default defineConfig({
     },
     { name: 'smoke-mobile',
       grep: [/@p1/],
+      grepInvert: [/@visual/],
       use: { 
         ...devices['iPhone 14'],
         "isMobile": true,
@@ -55,16 +57,34 @@ export default defineConfig({
       },
     },
     { name: 'full-chrome',
+      grepInvert: [/@visual/],
       use: { ...devices['Desktop Chrome'] },
     },
-
     { name: 'full-firefox',
+      grepInvert: [/@visual/],
       use: { ...devices['Desktop Firefox'] },
     },
-
     { name: 'full-safari',
+      grepInvert: [/@visual/],
       use: { ...devices['Desktop Safari'] },
     },
+    //Visual testing
+    { name: 'visual-desktop-chrome',
+      grep: [/@visual/],
+      use: { ...devices['Desktop Chrome'] },
+    },
+    { name: 'visual-desktop-safari',
+      grep: [/@visual/],
+      use: { ...devices['Desktop Safari'] },
+    },
+    { name: 'visual-mobile-android',
+      grep: [/@visual/],
+      use: { ...devices['Galaxy S9+'] },
+    },
+    { name: 'visual-mobile-iphone',
+      grep: [/@visual/],
+      use: { ...devices['iPhone 14'] },
+    }
 
     /* Test against mobile viewports. */
     // {
