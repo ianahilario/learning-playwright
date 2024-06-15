@@ -12,7 +12,7 @@
     "test-smoke-ci": "npx playwright test --project=smoke --project=smoke-mobile",
     "test-full": "npx playwright test --project=full-chrome --project=full-firefox --project=full-safari --ui",
     "test-full-ci": "npx playwright test --project=full-chrome --project=full-firefox --project=full-safari",
-    "test-visual-ci": "npx playwright test --project=full-visual-desktop-chrome --project=visual-desktop-safari --project=visual-mobile-android --project=visual-mobile-iphone"
+    "test-visual-ci": "npx playwright test --project=fvisual-desktop-chrome --project=visual-desktop-safari --project=visual-mobile-android --project=visual-mobile-iphone"
   },
   "keywords": [],
   "author": "",
