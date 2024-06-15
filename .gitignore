@@ -1,6 +1,7 @@
 node_modules/
 /test-results/
 /playwright-report/
+/.visual-test-snapshots/
 /blob-report/
 /playwright/.cache/
 .env.secret

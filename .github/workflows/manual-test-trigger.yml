@@ -37,6 +37,17 @@ jobs:
     - name: Run full tests
       if: ${{ github.event.inputs.test-suite == 'full' }}
       run: npm run test-full-ci
+    - name: Set up cache for visual test
+      if: ${{ github.event.inputs.test-suite == 'visual' }}
+      id: cache
+      uses: actions/cache@v4
+      with:
+        key: cache/${{github.repository}}/${{github.ref}}
+        restore-keys: cache/${{github.repository}}/refs/heads/master
+        path: .visual-test-snapshots/**
+    - name: Initialize snapshots for visual test
+      if: ${{steps.cache.outputs.cache-hit != 'true' && github.event.inputs.test-suite == 'visual'}}
+      run: npm run test-visual-ci --update-snapshots
     - name: Run visual tests
       if: ${{ github.event.inputs.test-suite == 'visual' }}
       run: npm run test-visual-ci

@@ -28,6 +28,7 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   maxFailures: process.env.CI ? 9 : undefined,
+  snapshotPathTemplate: '.visual-test-snapshots/{projectName}/{testFilePath}/{arg}{ext}',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
