@@ -1,9 +1,13 @@
-name: Automatically run smoke test
+name: Manual test trigger
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      test-suite:
+        type: choice
+        description: Test suite
+        options: 
+        - smoke
+        - full
 env:
   USER_USERNAME: ${{ secrets.USER_USERNAME }}
   USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
@@ -26,7 +30,11 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run smoke tests
+      if: ${{ github.event.inputs.test-suite == 'smoke' }}
       run: npm run test-smoke-ci
+    - name: Run full tests
+      if: ${{ github.event.inputs.test-suite == 'full' }}
+      run: npm run test-full-ci
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
