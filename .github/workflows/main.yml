@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [ main ]
 env:
-  USER_USERNAME=${{ secrets.USER_USERNAME }}
+  USER_USERNAME: ${{ secrets.USER_USERNAME }}
   
 jobs:
   test:
