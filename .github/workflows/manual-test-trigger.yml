@@ -42,8 +42,7 @@ jobs:
       id: cache
       uses: actions/cache@v4
       with:
-        key: cache/${{github.repository}}/${{github.ref}}
-        restore-keys: cache/${{github.repository}}/refs/heads/main
+        key: cache/${{github.repository}}/refs/heads/main
         path: .visual-test-snapshots/**
     - name: Initialize snapshots for visual test
       if: ${{steps.cache.outputs.cache-hit != 'true' && github.event.inputs.test-suite == 'visual'}}
