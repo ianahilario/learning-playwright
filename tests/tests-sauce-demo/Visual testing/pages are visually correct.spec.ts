@@ -43,7 +43,7 @@ test('visual testing', {tag: '@visual'},  async ({page, loginPage, header, produ
     await test.step(`confirmation page`, async () => {
         await cartReviewPage.gotoCartConfirmationPage();
         await cartConfirmationPage.isCorrectPage();
-        await expect.soft(page).toHaveScreenshot({fullPage : true});
+        await expect.soft(page).toHaveScreenshot({fullPage : false});
     });
 });
 
