@@ -1,9 +1,7 @@
-name: Automatically run smoke test
+name: Update base snapshots for visual tests
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  workflow_dispatch:
+run-name: Update base snapshots by @${{ github.actor }}
 env:
   USER_USERNAME: ${{ secrets.USER_USERNAME }}
   USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
@@ -11,6 +9,8 @@ env:
   USER_STANDARD_PASSWORD: ${{ secrets.USER_STANDARD_PASSWORD }}
   USER_LOCKED_USERNAME: ${{ secrets.USER_LOCKED_USERNAME }}
   USER_LOCKED_PASSWORD: ${{ secrets.USER_LOCKED_PASSWORD }}
+  CI_COMMIT_MESSAGE: Updated based snapshots for visual testing
+  CI_COMMIT_AUTHOR: Continuous Integration
   
 jobs:
   test:
@@ -25,12 +25,17 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
-    - name: Run smoke tests
-      run: npm run test-smoke-ci
+    - name: Run visual tests to update base snapshots
+      run: npm run test-visual-ci --update-snapshots
+    - name: Commit and push latest base snapshots
+      run: |
+        git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
+        git config --global user.email "username@users.noreply.github.com"
+        git commit -a -m "${{ env.CI_COMMIT_MESSAGE }}"
+        git push
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
-
