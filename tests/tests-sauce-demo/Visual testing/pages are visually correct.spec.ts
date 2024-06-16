@@ -24,7 +24,7 @@ test('visual testing', {tag: '@visual'},  async ({page, loginPage, header, produ
     await test.step(`cart page`, async () => {
         await header.goToShoppingCartPage();
         await cartPage.isCorrectPage();
-        await expect(page).toHaveScreenshot();
+        await expect.soft(page).toHaveScreenshot({fullPage : true});
     });
 
     await test.step(`cart checkout page`, async () => {
