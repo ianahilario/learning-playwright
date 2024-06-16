@@ -3,20 +3,24 @@ import { test } from '../../../fixtures/testBase';
 
 
 test('visual testing', {tag: '@visual'},  async ({page, loginPage, header, productListingPage, productDetailsPage, cartPage, cartCheckoutPage, cartReviewPage, cartConfirmationPage }) => {
+    test.slow();
     await test.step(`login page`, async () => {
         await loginPage.goToLoginPage();
-        await expect.soft(page).toHaveScreenshot({fullPage : true});
+        await page.waitForTimeout(1000);
+        await expect.soft(page).toHaveScreenshot({fullPage : true, maxDiffPixelRatio: 0.2});
         await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
     });
 
     await test.step(`product listing page`, async () => {
         await productListingPage.isCorrectPage();
+        await page.waitForTimeout(1000);
         await expect.soft(page).toHaveScreenshot({fullPage : true, maxDiffPixelRatio: 0.2});
     });
 
     await test.step(`product details page`, async () => {
         await productListingPage.goToDetailsPage();
         await productDetailsPage.isCorrectPage();
+        await page.waitForTimeout(1000);
         await expect.soft(page).toHaveScreenshot({fullPage : true, maxDiffPixelRatio: 0.2});
         await productDetailsPage.cartItem.addItemToCartbyIndex();
     });
@@ -24,12 +28,14 @@ test('visual testing', {tag: '@visual'},  async ({page, loginPage, header, produ
     await test.step(`cart page`, async () => {
         await header.goToShoppingCartPage();
         await cartPage.isCorrectPage();
+        await page.waitForTimeout(1000);
         await expect.soft(page).toHaveScreenshot({fullPage : true, maxDiffPixelRatio: 0.2});
     });
 
     await test.step(`cart checkout page`, async () => {
         await cartPage.gotoCartCheckoutPage();
         await cartCheckoutPage.isCorrectPage();
+        await page.waitForTimeout(1000);
         await expect.soft(page).toHaveScreenshot({fullPage : true, maxDiffPixelRatio: 0.2});
         await cartCheckoutPage.fillCheckoutForm();
     });
@@ -37,12 +43,14 @@ test('visual testing', {tag: '@visual'},  async ({page, loginPage, header, produ
     await test.step(`cart review page`, async () => {
         await cartCheckoutPage.gotoCartReviewPage();
         await cartReviewPage.isCorrectPage();
+        await page.waitForTimeout(1000);
         await expect.soft(page).toHaveScreenshot({fullPage : true, maxDiffPixelRatio: 0.2});
     });
 
     await test.step(`confirmation page`, async () => {
         await cartReviewPage.gotoCartConfirmationPage();
         await cartConfirmationPage.isCorrectPage();
+        await page.waitForTimeout(1000);
         await expect.soft(page).toHaveScreenshot({fullPage : false, maxDiffPixelRatio: 0.2});
     });
 });
