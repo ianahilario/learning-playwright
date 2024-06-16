@@ -27,6 +27,7 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run visual tests to update base snapshots
       run: npm run test-visual-ci --update-snapshots
+      continue-on-error: true
     - name: Commit and push latest base snapshots
       run: |
         git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
