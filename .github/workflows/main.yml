@@ -4,6 +4,8 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  schedule:
+    - cron: "0 5-22 * * 1-5"
 env:
   USER_USERNAME: ${{ secrets.USER_USERNAME }}
   USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
