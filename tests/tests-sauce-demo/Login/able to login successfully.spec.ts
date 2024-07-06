@@ -1,7 +1,8 @@
 import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/testBase';
+import { TAG_P1 } from '../../../utils/testTagManager';
 
-test('should login successfully', {tag: '@p1'}, async ({page, loginPage, productListingPage }) => {
+test('should login successfully', {tag: TAG_P1}, async ({page, loginPage, productListingPage }) => {
     await test.step(`go to homepage`, async () => {
         await loginPage.goToLoginPage();
     });
