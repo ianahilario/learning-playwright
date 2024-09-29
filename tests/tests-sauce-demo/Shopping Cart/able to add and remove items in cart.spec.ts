@@ -1,12 +1,13 @@
 import { test } from '../../../fixtures/testBase';
+import { Product } from '../../../models/data/dataObjects';
 
 test.describe('Add/remove cart items', () => {
   test(
     'should allow to add/remove from the Product Listing page',
     { tag: '@p1' },
     async ({ loginPage, header, productListingPage, cartPage }) => {
-      let productItem1: string;
-      let productItem2: string;
+      let productItem1: Product;
+      let productItem2: Product;
 
       await test.step(`go to homepage`, async () => {
         await loginPage.goToLoginPage();

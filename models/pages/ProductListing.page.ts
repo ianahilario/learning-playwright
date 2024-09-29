@@ -90,7 +90,6 @@ export class ProductListingPage {
   //Getter
   async getProductData(index?: number): Promise<Product> {
     let productLocator: Locator;
-    const productData: Product;
 
     index === undefined
       ? (productLocator = this.products.nth(0))
@@ -109,7 +108,7 @@ export class ProductListingPage {
       .locator('//div[@data-test="inventory-item-price"]')
       .textContent();
 
-    productData = {
+    const productData = {
       imageUrl: productImage,
       name: productName,
       description: productDescription,
