@@ -1,5 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
-import dotenv from "dotenv"
+import dotenv from 'dotenv';
 
 /**
  * Read environment variables from file.
@@ -8,7 +8,7 @@ import dotenv from "dotenv"
 // require('dotenv').config();
 
 dotenv.config({
-  path: `./.env.secret`,
+  path: `./.env.secret`
 });
 
 /**
@@ -28,63 +28,73 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   maxFailures: process.env.CI ? 9 : undefined,
-  snapshotPathTemplate: '.visual-test-snapshots/{projectName}/{testFilePath}/{arg}{ext}',
+  snapshotPathTemplate:
+    '.visual-test-snapshots/{projectName}/{testFilePath}/{arg}{ext}',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on',
+    trace: 'on'
   },
 
   /* Configure projects for major browsers */
   projects: [
-    { name: 'smoke',
+    {
+      name: 'smoke',
       grep: [/@p1/],
       grepInvert: [/@visual/],
       use: {
         ...devices['Desktop Chrome'],
         video: 'on'
-      },
+      }
     },
-    { name: 'smoke-mobile',
+    {
+      name: 'smoke-mobile',
       grep: [/@p1/],
       grepInvert: [/@visual/],
-      use: { 
+      use: {
         ...devices['iPhone 14'],
-        "isMobile": true,
+        isMobile: true,
         video: 'on'
-      },
+      }
     },
-    { name: 'full-chrome',
+    {
+      name: 'full-chrome',
       grepInvert: [/@visual/],
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'] }
     },
-    { name: 'full-firefox',
+    {
+      name: 'full-firefox',
       grepInvert: [/@visual/],
-      use: { ...devices['Desktop Firefox'] },
+      use: { ...devices['Desktop Firefox'] }
     },
-    { name: 'full-safari',
+    {
+      name: 'full-safari',
       grepInvert: [/@visual/],
-      use: { ...devices['Desktop Safari'] },
+      use: { ...devices['Desktop Safari'] }
     },
     //Visual testing
-    { name: 'visual-desktop-chrome',
+    {
+      name: 'visual-desktop-chrome',
       grep: [/@visual/],
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'] }
     },
-    { name: 'visual-desktop-safari',
+    {
+      name: 'visual-desktop-safari',
       grep: [/@visual/],
-      use: { ...devices['Desktop Safari'] },
+      use: { ...devices['Desktop Safari'] }
     },
-    { name: 'visual-mobile-android',
+    {
+      name: 'visual-mobile-android',
       grep: [/@visual/],
-      use: { ...devices['Galaxy S9+'] },
+      use: { ...devices['Galaxy S9+'] }
     },
-    { name: 'visual-mobile-iphone',
+    {
+      name: 'visual-mobile-iphone',
       grep: [/@visual/],
-      use: { ...devices['iPhone 14'] },
+      use: { ...devices['iPhone 14'] }
     }
 
     /* Test against mobile viewports. */
@@ -106,7 +116,7 @@ export default defineConfig({
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
-  ],
+  ]
 
   /* Run your local dev server before starting the tests */
   // webServer: {
