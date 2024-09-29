@@ -10,9 +10,15 @@ export class HeaderPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.shoppingCartIcon = this.page.locator('//a[@data-test="shopping-cart-link"]');
-    this.shoppingCartBadge = this.page.locator('//span[@data-test="shopping-cart-badge"]');
-    this.burgerMenuButton = this.page.locator('//button[@id="react-burger-menu-btn"]');
+    this.shoppingCartIcon = this.page.locator(
+      '//a[@data-test="shopping-cart-link"]'
+    );
+    this.shoppingCartBadge = this.page.locator(
+      '//span[@data-test="shopping-cart-badge"]'
+    );
+    this.burgerMenuButton = this.page.locator(
+      '//button[@id="react-burger-menu-btn"]'
+    );
     this.burgerMenu = this.page.locator('//div[@class="bm-menu"]');
   }
 
@@ -38,10 +44,14 @@ export class HeaderPage {
         'Shopping cart badge is not displayed when qty=0'
       ).not.toBeVisible();
     } else {
-      await expect(this.shoppingCartBadge, 'Shopping cart badge is displayed').toBeVisible();
-      await expect(this.shoppingCartBadge, 'Shopping cart badge shows correct quantity').toHaveText(
-        `${expectedCartQuantity}`
-      );
+      await expect(
+        this.shoppingCartBadge,
+        'Shopping cart badge is displayed'
+      ).toBeVisible();
+      await expect(
+        this.shoppingCartBadge,
+        'Shopping cart badge shows correct quantity'
+      ).toHaveText(`${expectedCartQuantity}`);
     }
   }
 

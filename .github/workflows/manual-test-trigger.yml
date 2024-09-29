@@ -5,10 +5,10 @@ on:
       test-suite:
         type: choice
         description: Test suite
-        options: 
-        - smoke
-        - full
-        - visual
+        options:
+          - smoke
+          - full
+          - visual
 run-name: Run test-suite=${{ github.event.inputs.test-suite }} by @${{ github.actor }}
 env:
   USER_USERNAME: ${{ secrets.USER_USERNAME }}
@@ -17,33 +17,32 @@ env:
   USER_STANDARD_PASSWORD: ${{ secrets.USER_STANDARD_PASSWORD }}
   USER_LOCKED_USERNAME: ${{ secrets.USER_LOCKED_USERNAME }}
   USER_LOCKED_PASSWORD: ${{ secrets.USER_LOCKED_PASSWORD }}
-  
+
 jobs:
   test:
     timeout-minutes: 60
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: 18
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run smoke tests
-      if: ${{ github.event.inputs.test-suite == 'smoke' }}
-      run: npm run test-smoke-ci
-    - name: Run full tests
-      if: ${{ github.event.inputs.test-suite == 'full' }}
-      run: npm run test-full-ci
-    - name: Run visual tests
-      if: ${{ github.event.inputs.test-suite == 'visual' }}
-      run: npm run test-visual-ci
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
-
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run smoke tests
+        if: ${{ github.event.inputs.test-suite == 'smoke' }}
+        run: npm run test-smoke-ci
+      - name: Run full tests
+        if: ${{ github.event.inputs.test-suite == 'full' }}
+        run: npm run test-full-ci
+      - name: Run visual tests
+        if: ${{ github.event.inputs.test-suite == 'visual' }}
+        run: npm run test-visual-ci
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30

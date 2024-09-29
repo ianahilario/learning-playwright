@@ -9,7 +9,10 @@ test(
 
     await test.step(`go to homepage`, async () => {
       await loginPage.goToLoginPage();
-      await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
+      await loginPage.submitLogin(
+        `${process.env.USER_USERNAME}`,
+        `${process.env.USER_PASSWORD}`
+      );
       await productListingPage.isCorrectPage();
     });
 
@@ -20,7 +23,11 @@ test(
     await test.step(`same details are displayed in Listing and Details page`, async () => {
       await productListingPage.goToDetailsPage();
       await productDetailsPage.isCorrectPage();
-      await productDetailsPage.cartItem.isCorrectProductData(product, true, false);
+      await productDetailsPage.cartItem.isCorrectProductData(
+        product,
+        true,
+        false
+      );
     });
   }
 );
@@ -32,7 +39,10 @@ test('should be able to go back to Listing page via "Back to products" link"', a
 }) => {
   await test.step(`go to homepage`, async () => {
     await loginPage.goToLoginPage();
-    await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
+    await loginPage.submitLogin(
+      `${process.env.USER_USERNAME}`,
+      `${process.env.USER_PASSWORD}`
+    );
     await productListingPage.isCorrectPage();
   });
 

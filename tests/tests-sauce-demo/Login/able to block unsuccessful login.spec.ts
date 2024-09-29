@@ -14,7 +14,9 @@ test('should show errror when login fails', async ({ page, loginPage }) => {
   });
 
   await test.step(`verify that an error is displayed in the page`, async () => {
-    await expect(page, 'User is still in the login page').toHaveURL('https://www.saucedemo.com/');
+    await expect(page, 'User is still in the login page').toHaveURL(
+      'https://www.saucedemo.com/'
+    );
     await expect(page.locator('//h3[@data-test="error"]')).toHaveText(
       'Epic sadface: Sorry, this user has been locked out.'
     );

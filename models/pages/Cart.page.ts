@@ -13,7 +13,9 @@ export class CartPage {
     this.page = page;
     this.pageTitle = this.page.locator('//span[@data-test="title"]');
     this.checkoutButton = this.page.locator('//button[@data-test="checkout"]');
-    this.continueShoppingButton = this.page.locator('//button[@data-test="continue-shopping"]');
+    this.continueShoppingButton = this.page.locator(
+      '//button[@data-test="continue-shopping"]'
+    );
     this.cartItem = new CartItemComponent(page);
   }
 
@@ -50,7 +52,9 @@ export class CartPage {
     };
 
     products.forEach((product) => {
-      const price = Number(String(product.price).replace('$', '').replace(',', ''));
+      const price = Number(
+        String(product.price).replace('$', '').replace(',', '')
+      );
       computedSubTotalPrice = computedSubTotalPrice + price;
 
       shoppingCartData.subTotalPrice = computedSubTotalPrice;

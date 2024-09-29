@@ -19,7 +19,10 @@ test(
 
     await test.step(`go to homepage`, async () => {
       await loginPage.goToLoginPage();
-      await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
+      await loginPage.submitLogin(
+        `${process.env.USER_USERNAME}`,
+        `${process.env.USER_PASSWORD}`
+      );
       await productListingPage.isCorrectPage();
     });
 
@@ -43,7 +46,10 @@ test(
       await cartPage.cartItem.isCorrectProductData(productItem1, false, true);
       await cartPage.cartItem.isCorrectProductData(productItem2, false, true);
 
-      shoppingCartData = await cartPage.getShoppingCartData([productItem1, productItem2]);
+      shoppingCartData = await cartPage.getShoppingCartData([
+        productItem1,
+        productItem2
+      ]);
     });
 
     await test.step(`go to Cart - Checkout page`, async () => {

@@ -15,11 +15,21 @@ export class CartItemComponent {
     this.page = page;
     this.cartItem = this.page.locator('//div[@data-test="inventory-item"]');
     this.productImage = this.page.locator('//img');
-    this.productName = this.page.locator('//div[@data-test="inventory-item-name"]');
-    this.productDescription = this.page.locator('//div[@data-test="inventory-item-desc"]');
-    this.productPrice = this.page.locator('//div[@data-test="inventory-item-price"]');
-    this.addtoCartButton = this.page.locator('//button[starts-with(@data-test,"add-to-cart")]');
-    this.removetoCartButton = this.page.locator('//button[starts-with(@data-test,"remove")]');
+    this.productName = this.page.locator(
+      '//div[@data-test="inventory-item-name"]'
+    );
+    this.productDescription = this.page.locator(
+      '//div[@data-test="inventory-item-desc"]'
+    );
+    this.productPrice = this.page.locator(
+      '//div[@data-test="inventory-item-price"]'
+    );
+    this.addtoCartButton = this.page.locator(
+      '//button[starts-with(@data-test,"add-to-cart")]'
+    );
+    this.removetoCartButton = this.page.locator(
+      '//button[starts-with(@data-test,"remove")]'
+    );
   }
 
   async isCorrectProductData(
@@ -53,7 +63,10 @@ export class CartItemComponent {
       .soft(productItem.locator(this.productName), 'Correct product item')
       .toHaveText(productData.name);
     await expect
-      .soft(productItem.locator(this.productDescription), 'Correct product description')
+      .soft(
+        productItem.locator(this.productDescription),
+        'Correct product description'
+      )
       .toHaveText(productData.description);
     await expect
       .soft(productItem.locator(this.productPrice), 'Correct product price')
@@ -68,7 +81,10 @@ export class CartItemComponent {
           )
           .toBeVisible();
         await expect
-          .soft(productItem.locator(this.addtoCartButton), "'Add to cart' button is not displayed")
+          .soft(
+            productItem.locator(this.addtoCartButton),
+            "'Add to cart' button is not displayed"
+          )
           .not.toBeVisible();
       } else {
         await expect
@@ -78,7 +94,10 @@ export class CartItemComponent {
           )
           .toBeVisible();
         await expect
-          .soft(productItem.locator(this.removetoCartButton), "'Remove' button is not displayed")
+          .soft(
+            productItem.locator(this.removetoCartButton),
+            "'Remove' button is not displayed"
+          )
           .not.toBeVisible();
       }
     }
@@ -86,7 +105,9 @@ export class CartItemComponent {
 
   async addItemToCartbyIndex(productIndex?: number) {
     const productItem =
-      productIndex === undefined ? this.cartItem.first() : this.cartItem.nth(productIndex);
+      productIndex === undefined
+        ? this.cartItem.first()
+        : this.cartItem.nth(productIndex);
 
     await productItem.locator(this.addtoCartButton).click();
     await expect
@@ -103,14 +124,20 @@ export class CartItemComponent {
       .not.toBeVisible();
   }
 
-  async removeItemToCartbyProduct(productData: Product, isRemoveFromCartpage?: boolean) {
+  async removeItemToCartbyProduct(
+    productData: Product,
+    isRemoveFromCartpage?: boolean
+  ) {
     const productItem = await this.getProductItemLocator(productData);
 
     await productItem.locator(this.removetoCartButton).click();
 
     if (isRemoveFromCartpage) {
       await expect
-        .soft(productItem, `Cart item for product '${productData.name}' is removed`)
+        .soft(
+          productItem,
+          `Cart item for product '${productData.name}' is removed`
+        )
         .not.toBeVisible();
     } else {
       await expect
@@ -129,6 +156,8 @@ export class CartItemComponent {
   }
 
   private async getProductItemLocator(productData: Product) {
-    return this.cartItem.filter({ has: this.productName.filter({ hasText: productData.name }) });
+    return this.cartItem.filter({
+      has: this.productName.filter({ hasText: productData.name })
+    });
   }
 }

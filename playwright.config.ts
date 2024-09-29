@@ -28,7 +28,8 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   maxFailures: process.env.CI ? 9 : undefined,
-  snapshotPathTemplate: '.visual-test-snapshots/{projectName}/{testFilePath}/{arg}{ext}',
+  snapshotPathTemplate:
+    '.visual-test-snapshots/{projectName}/{testFilePath}/{arg}{ext}',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -59,14 +60,42 @@ export default defineConfig({
         video: 'on'
       }
     },
-    { name: 'full-chrome', grepInvert: [/@visual/], use: { ...devices['Desktop Chrome'] } },
-    { name: 'full-firefox', grepInvert: [/@visual/], use: { ...devices['Desktop Firefox'] } },
-    { name: 'full-safari', grepInvert: [/@visual/], use: { ...devices['Desktop Safari'] } },
+    {
+      name: 'full-chrome',
+      grepInvert: [/@visual/],
+      use: { ...devices['Desktop Chrome'] }
+    },
+    {
+      name: 'full-firefox',
+      grepInvert: [/@visual/],
+      use: { ...devices['Desktop Firefox'] }
+    },
+    {
+      name: 'full-safari',
+      grepInvert: [/@visual/],
+      use: { ...devices['Desktop Safari'] }
+    },
     //Visual testing
-    { name: 'visual-desktop-chrome', grep: [/@visual/], use: { ...devices['Desktop Chrome'] } },
-    { name: 'visual-desktop-safari', grep: [/@visual/], use: { ...devices['Desktop Safari'] } },
-    { name: 'visual-mobile-android', grep: [/@visual/], use: { ...devices['Galaxy S9+'] } },
-    { name: 'visual-mobile-iphone', grep: [/@visual/], use: { ...devices['iPhone 14'] } }
+    {
+      name: 'visual-desktop-chrome',
+      grep: [/@visual/],
+      use: { ...devices['Desktop Chrome'] }
+    },
+    {
+      name: 'visual-desktop-safari',
+      grep: [/@visual/],
+      use: { ...devices['Desktop Safari'] }
+    },
+    {
+      name: 'visual-mobile-android',
+      grep: [/@visual/],
+      use: { ...devices['Galaxy S9+'] }
+    },
+    {
+      name: 'visual-mobile-iphone',
+      grep: [/@visual/],
+      use: { ...devices['iPhone 14'] }
+    }
 
     /* Test against mobile viewports. */
     // {

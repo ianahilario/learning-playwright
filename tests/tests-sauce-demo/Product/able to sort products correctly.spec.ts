@@ -5,7 +5,10 @@ test('should show correct sort options and sorts correctly', async ({
   productListingPage
 }) => {
   await loginPage.goToLoginPage();
-  await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
+  await loginPage.submitLogin(
+    `${process.env.USER_USERNAME}`,
+    `${process.env.USER_PASSWORD}`
+  );
   await productListingPage.isCorrectPage();
 
   await productListingPage.isCorrectSorting('Name (A to Z)');
