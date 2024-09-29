@@ -12,7 +12,16 @@
     "test-smoke-ci": "npx playwright test --project=smoke --project=smoke-mobile",
     "test-full": "npx playwright test --project=full-chrome --project=full-firefox --project=full-safari --ui",
     "test-full-ci": "npx playwright test --project=full-chrome --project=full-firefox --project=full-safari",
-    "test-visual-ci": "npx playwright test --project=visual-desktop-chrome --project=visual-desktop-safari --project=visual-mobile-android --project=visual-mobile-iphone"
+    "test-visual-ci": "npx playwright test --project=visual-desktop-chrome --project=visual-desktop-safari --project=visual-mobile-android --project=visual-mobile-iphone",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js, jsx,ts,tsx}": [
+      "eslint --quiet --fix"
+    ],
+    "*.{json,js,ts,jsx,tsx,html}": [
+      "prettier --write --ignore-unknown"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -24,6 +33,16 @@
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
     "@playwright/test": "^1.44.1",
-    "@types/node": "^20.11.30"
+    "@types/node": "^20.11.30",
+    "@typescript-eslint/eslint-plugin": "^8.7.0",
+    "@typescript-eslint/parser": "^8.7.0",
+    "eslint": "^9.11.1",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.9.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.2",
+    "typescript-eslint": "^8.7.0"
   }
 }
