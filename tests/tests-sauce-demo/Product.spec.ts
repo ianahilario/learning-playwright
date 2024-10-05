@@ -1,5 +1,5 @@
-import { Product } from '../../../models/data/dataObjects';
-import { test } from '../../../fixtures/testBase';
+import { Product } from '../../models/data/dataObjects';
+import { test } from '../../fixtures/testBase';
 
 test(
   'should show same product details in Listing and Details',
@@ -55,4 +55,21 @@ test('should be able to go back to Listing page via "Back to products" link"', a
     await productDetailsPage.goBackToListingPage();
     await productListingPage.isCorrectPage();
   });
+});
+
+test('should show correct sort options and sorts correctly', async ({
+  loginPage,
+  productListingPage
+}) => {
+  await loginPage.goToLoginPage();
+  await loginPage.submitLogin(
+    `${process.env.USER_USERNAME}`,
+    `${process.env.USER_PASSWORD}`
+  );
+  await productListingPage.isCorrectPage();
+
+  await productListingPage.isCorrectSorting('Name (A to Z)');
+  await productListingPage.isCorrectSorting('Name (Z to A)');
+  await productListingPage.isCorrectSorting('Price (low to high)');
+  await productListingPage.isCorrectSorting('Price (high to low)');
 });
