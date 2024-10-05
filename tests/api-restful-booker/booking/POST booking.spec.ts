@@ -66,6 +66,17 @@ test.describe('firstname attribute validation', () => {
     expect(response.status()).toBe(500);
   });
 
+  test("field doesn't accept blank", async ({ request }) => {
+    requestBody.firstname = '';
+    const response = await request.post(`${process.env.API_BASE_URL}/booking`, {
+      data: requestBody
+    });
+
+    console.log(response.status());
+    expect(response.ok()).not.toBeTruthy();
+    expect(response.status()).toBe(500);
+  });
+
   test("field doesn't accept number", async ({ request }) => {
     requestBody.firstname = 123;
     const response = await request.post(`${process.env.API_BASE_URL}/booking`, {
@@ -92,6 +103,17 @@ test.describe('lastname attribute validation', () => {
 
   test("field doesn't accept null", async ({ request }) => {
     requestBody.lastname = null;
+    const response = await request.post(`${process.env.API_BASE_URL}/booking`, {
+      data: requestBody
+    });
+
+    console.log(response.status());
+    expect(response.ok()).not.toBeTruthy();
+    expect(response.status()).toBe(500);
+  });
+
+  test("field doesn't accept blank", async ({ request }) => {
+    requestBody.lastname = '';
     const response = await request.post(`${process.env.API_BASE_URL}/booking`, {
       data: requestBody
     });
