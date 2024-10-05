@@ -1,20 +1,9 @@
 import { expect } from '@playwright/test';
 import { test } from '../../../fixtures/apiRestfulBookingBase';
 
-interface requestBody {
-  firstname: string;
-  lastname: string;
-  totalprice: number;
-  depositpaid: boolean;
-  bookingdates: {
-    checkin: string;
-    checkout: string;
-  };
-  additionalneeds: string;
-}
-
-test('able to add booking', async ({ request }) => {
-  const requestBody: requestBody = {
+let requestBody;
+async function createBookingBody() {
+  const body = {
     firstname: 'Michael',
     lastname: 'Pangilinan',
     totalprice: 100,
@@ -26,6 +15,14 @@ test('able to add booking', async ({ request }) => {
     additionalneeds: 'with window'
   };
 
+  return body;
+}
+
+test.beforeEach(async () => {
+  requestBody = await createBookingBody();
+});
+
+test('able to add booking', async ({ request }) => {
   const response = await request.post(`${process.env.API_BASE_URL}/booking`, {
     data: requestBody
   });
@@ -44,4 +41,74 @@ test('able to add booking', async ({ request }) => {
   expect.soft(responseBody.booking.bookingdates).toHaveProperty('checkin', '2023-06-01');
   expect.soft(responseBody.booking.bookingdates).toHaveProperty('checkout', '2024-06-27');
   expect.soft(responseBody.booking).toHaveProperty('additionalneeds', 'with window');
+});
+
+test.describe('firstname attribute validation', () => {
+  test('field is required', async ({ request }) => {
+    delete requestBody.firstname;
+    const response = await request.post(`${process.env.API_BASE_URL}/booking`, {
+      data: requestBody
+    });
+
+    console.log(response.status());
+    expect(response.ok()).not.toBeTruthy();
+    expect(response.status()).toBe(500);
+  });
+
+  test("field doesn't accept null", async ({ request }) => {
+    requestBody.firstname = null;
+    const response = await request.post(`${process.env.API_BASE_URL}/booking`, {
+      data: requestBody
+    });
+
+    console.log(response.status());
+    expect(response.ok()).not.toBeTruthy();
+    expect(response.status()).toBe(500);
+  });
+
+  test("field doesn't accept number", async ({ request }) => {
+    requestBody.firstname = 123;
+    const response = await request.post(`${process.env.API_BASE_URL}/booking`, {
+      data: requestBody
+    });
+
+    console.log(response.status());
+    expect(response.ok()).not.toBeTruthy();
+    expect(response.status()).toBe(500);
+  });
+});
+
+test.describe('lastname attribute validation', () => {
+  test('field is required', async ({ request }) => {
+    delete requestBody.lastname;
+    const response = await request.post(`${process.env.API_BASE_URL}/booking`, {
+      data: requestBody
+    });
+
+    console.log(response.status());
+    expect(response.ok()).not.toBeTruthy();
+    expect(response.status()).toBe(500);
+  });
+
+  test("field doesn't accept null", async ({ request }) => {
+    requestBody.lastname = null;
+    const response = await request.post(`${process.env.API_BASE_URL}/booking`, {
+      data: requestBody
+    });
+
+    console.log(response.status());
+    expect(response.ok()).not.toBeTruthy();
+    expect(response.status()).toBe(500);
+  });
+
+  test("field doesn't accept number", async ({ request }) => {
+    requestBody.lastname = 123;
+    const response = await request.post(`${process.env.API_BASE_URL}/booking`, {
+      data: requestBody
+    });
+
+    console.log(response.status());
+    expect(response.ok()).not.toBeTruthy();
+    expect(response.status()).toBe(500);
+  });
 });
