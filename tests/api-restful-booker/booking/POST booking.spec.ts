@@ -41,13 +41,7 @@ test('able to add booking', async ({ request }) => {
   expect.soft(responseBody.booking).toHaveProperty('lastname', 'Pangilinan');
   expect.soft(responseBody.booking).toHaveProperty('totalprice', 100);
   expect.soft(responseBody.booking).toHaveProperty('depositpaid', true);
-  expect
-    .soft(responseBody.bookingdates)
-    .toHaveProperty('checkin', '2023-06-01');
-  expect
-    .soft(responseBody.bookingdates)
-    .toHaveProperty('checkout', '2024-06-27');
-  expect
-    .soft(responseBody.booking)
-    .toHaveProperty('additionalneeds', 'with window');
+  expect.soft(responseBody.booking.bookingdates).toHaveProperty('checkin', '2023-06-01');
+  expect.soft(responseBody.booking.bookingdates).toHaveProperty('checkout', '2024-06-27');
+  expect.soft(responseBody.booking).toHaveProperty('additionalneeds', 'with window');
 });
