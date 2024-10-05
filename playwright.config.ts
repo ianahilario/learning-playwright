@@ -8,7 +8,7 @@ import dotenv from 'dotenv';
 // require('dotenv').config();
 
 dotenv.config({
-  path: `./.env.secret`
+  path: [`./.env.secret`, '/.env']
 });
 
 /**
