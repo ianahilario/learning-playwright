@@ -15,7 +15,7 @@ export const test = base.extend<testFixtures>({
     console.log(`API base url: ${process.env.API_BASE_URL}`);
     const apiRequest: APIRequestContext = await request.newContext();
     return apiRequest
-      .post(`https://restful-booker.herokuapp.com/auth`, {
+      .post(`${process.env.API_BASE_URL}/auth`, {
         headers: {
           'Content-Type': 'application/json'
         },
