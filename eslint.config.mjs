@@ -59,7 +59,14 @@ export default [
       'object-curly-spacing': ['error', 'always'],
       '@typescript-eslint/no-floating-promises': 'error',
       '@typescript-eslint/no-unused-expressions': 'warn',
-      '@typescript-eslint/await-thenable': 'error'
+      '@typescript-eslint/await-thenable': 'error',
+      "jest/expect-expect": [
+        "error",
+        {
+          "assertFunctionNames": ["expect"],
+          "additionalTestBlockFunctions": []
+        }
+  ]
     }
   }
 ];
