@@ -10,7 +10,7 @@ export class Navigation extends BasePage {
   }
 
   async gotoHomepageviaURL() {
-    await this.page.goto('https://practicesoftwaretesting.com/');
+    await this.page.goto(process.env.BASE_URL as string);
   }
 }
 
