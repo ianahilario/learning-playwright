@@ -16,7 +16,7 @@ const compat = new FlatCompat({
 
 export default [
   {
-    ignores: ['**/node_modules']
+    ignores: ['**/node_modules', 'playwright-report', 'test-results']
   },
   ...compat.extends('plugin:@typescript-eslint/stylistic'),
   {
@@ -25,7 +25,6 @@ export default [
       '@stylistic/js': stylisticJs
     },
 
-    ignores: ['node_modules'],
     files: ['**/**.{ts}'],
     languageOptions: {
       parser: tsParser,
