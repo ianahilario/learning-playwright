@@ -13,6 +13,7 @@ env:
   USER_STANDARD_PASSWORD: ${{ secrets.USER_STANDARD_PASSWORD }}
   USER_LOCKED_USERNAME: ${{ secrets.USER_LOCKED_USERNAME }}
   USER_LOCKED_PASSWORD: ${{ secrets.USER_LOCKED_PASSWORD }}
+  APP_UNDER_TEST: 'sauce-demo'
 
 jobs:
   test:
@@ -28,7 +29,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run smoke tests
-        run: npm run test-smoke-ci
+        run: npx playwright test tests/sauce-demo --project=smoke --project=smoke-mobile
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
