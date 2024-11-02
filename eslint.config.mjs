@@ -20,6 +20,19 @@ export default [
   },
   ...compat.extends('plugin:@typescript-eslint/stylistic'),
   {
+    ...playwright.configs['flat/recommended'],
+    files: ['tests/**'],
+    rules: {
+      ...playwright.configs['flat/recommended'].rules,
+      "playwright/expect-expect": [
+      "error",
+      {
+        "assertFunctionNames": []
+      }
+    ]
+    },
+  },
+  {
     plugins: {
       '@typescript-eslint': typescriptEslint,
       '@stylistic/js': stylisticJs
