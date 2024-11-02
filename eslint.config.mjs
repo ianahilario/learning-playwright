@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import js from '@eslint/js';
 import { FlatCompat } from '@eslint/eslintrc';
 import stylisticJs from '@stylistic/eslint-plugin-js';
+import playwright from 'eslint-plugin-playwright'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -27,7 +28,7 @@ export default [
       "playwright/expect-expect": [
       "error",
       {
-        "assertFunctionNames": []
+        "assertFunctionNames": ["isCorrectProductData", "isCorrectSorting"]
       }
     ]
     },

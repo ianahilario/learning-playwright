@@ -24,6 +24,8 @@ export class ProductListingPage {
     } else {
       await this.products.nth(index).locator('//a/img').click();
     }
+
+    await this.page.waitForURL(/inventory-item/);
   }
 
   //Assertions

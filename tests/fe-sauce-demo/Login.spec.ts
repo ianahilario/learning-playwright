@@ -19,7 +19,7 @@ test('should show errror when login fails', async ({ page, loginPage }) => {
   });
 });
 
-test('should login successfully', { tag: TAG_P1 }, async ({ loginPage, productListingPage }) => {
+test('should login successfully', { tag: TAG_P1 }, async ({ loginPage, productListingPage, page }) => {
   await test.step(`go to homepage`, async () => {
     await loginPage.goToLoginPage();
   });
@@ -29,6 +29,8 @@ test('should login successfully', { tag: TAG_P1 }, async ({ loginPage, productLi
   });
 
   await test.step(`verify that user is able to login successfully`, async () => {
-    await productListingPage.isCorrectPage();
+    await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
+    await expect.soft(page).toHaveTitle('Swag Labs');
+    await expect.soft(productListingPage.pageTitle).toHaveText('Products');
   });
 });

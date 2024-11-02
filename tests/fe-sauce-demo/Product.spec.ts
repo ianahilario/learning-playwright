@@ -1,5 +1,6 @@
 import { Product } from '../../models/data/data-objects';
 import { test } from '../../fixtures/sauce-demo';
+import { expect } from 'playwright/test';
 
 test(
   'should show same product details in Listing and Details',
@@ -10,7 +11,6 @@ test(
     await test.step(`go to homepage`, async () => {
       await loginPage.goToLoginPage();
       await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
-      await productListingPage.isCorrectPage();
     });
 
     await test.step(`take note of product details`, async () => {
@@ -28,12 +28,12 @@ test(
 test('should be able to go back to Listing page via "Back to products" link"', async ({
   loginPage,
   productListingPage,
-  productDetailsPage
+  productDetailsPage,
+  page
 }) => {
   await test.step(`go to homepage`, async () => {
     await loginPage.goToLoginPage();
     await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
-    await productListingPage.isCorrectPage();
   });
 
   await test.step(`go to Details page`, async () => {
@@ -44,6 +44,7 @@ test('should be able to go back to Listing page via "Back to products" link"', a
   await test.step(`go to back Listing page using breadcrumb link`, async () => {
     await productDetailsPage.goBackToListingPage();
     await productListingPage.isCorrectPage();
+    await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
   });
 });
 
