@@ -1,13 +1,13 @@
 import { test as base } from '@playwright/test';
 import { APIResponse } from '@playwright/test';
-import { ProductListingPage } from '../models/pages/product-listing.page';
-import { ProductDetailsPage } from '../models/pages/product-details.page';
-import { CartCheckoutPage } from '../models/pages/cart-checkout.page';
-import { CartReviewPage } from '../models/pages/cart-review.page';
-import { CartConfirmationPage } from '../models/pages/cart-confirmation.page';
-import { LoginPage } from '../models/pages/login.page';
-import { HeaderPage } from '../models/pages/header.page';
-import { CartPage } from '../models/pages/cart.page';
+import { ProductListingPage } from '../models/sauce-demo/pages/product-listing.page';
+import { ProductDetailsPage } from '../models/sauce-demo/pages/product-details.page';
+import { CartCheckoutPage } from '../models/sauce-demo/pages/cart-checkout.page';
+import { CartReviewPage } from '../models/sauce-demo/pages/cart-review.page';
+import { CartConfirmationPage } from '../models/sauce-demo/pages/cart-confirmation.page';
+import { LoginPage } from '../models/sauce-demo/pages/login.page';
+import { HeaderPage } from '../models/sauce-demo/pages/header.page';
+import { CartPage } from '../models/sauce-demo/pages/cart.page';
 
 interface testFixtures {
   loginPage: LoginPage;

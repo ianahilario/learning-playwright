@@ -1,5 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test';
-import { Product } from '../data/data-objects';
+import { Product } from '../../data/data-objects';
 import { CartItemComponent } from '../components/cart-item.component';
 
 export class ProductListingPage {
