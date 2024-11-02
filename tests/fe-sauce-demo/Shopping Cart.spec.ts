@@ -1,5 +1,5 @@
-import { test } from '../../fixtures/testBase';
-import { Product, ShoppingCart } from '../../models/data/dataObjects';
+import { test } from '../../fixtures/sauce-demo';
+import { Product, ShoppingCart } from '../../models/data/data-objects';
 
 test.describe('Able to add/remove cart items', () => {
   test(
@@ -11,10 +11,7 @@ test.describe('Able to add/remove cart items', () => {
 
       await test.step(`go to homepage`, async () => {
         await loginPage.goToLoginPage();
-        await loginPage.submitLogin(
-          `${process.env.USER_USERNAME}`,
-          `${process.env.USER_PASSWORD}`
-        );
+        await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
         await productListingPage.isCorrectPage();
       });
 
@@ -59,22 +56,13 @@ test.describe('Able to add/remove cart items', () => {
   test(
     'should allow to add/remove from the Product Details page',
     { tag: '@p1' },
-    async ({
-      loginPage,
-      header,
-      productListingPage,
-      productDetailsPage,
-      cartPage
-    }) => {
+    async ({ loginPage, header, productListingPage, productDetailsPage, cartPage }) => {
       let productItem1;
       let productItem2;
 
       await test.step(`go to homepage`, async () => {
         await loginPage.goToLoginPage();
-        await loginPage.submitLogin(
-          `${process.env.USER_USERNAME}`,
-          `${process.env.USER_PASSWORD}`
-        );
+        await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
         await productListingPage.isCorrectPage();
       });
 
@@ -111,18 +99,14 @@ test.describe('Able to add/remove cart items', () => {
 
         await productListingPage.goToDetailsPage(0);
         await productDetailsPage.isCorrectPage();
-        await productListingPage.cartItem.removeItemToCartbyProduct(
-          productItem1
-        );
+        await productListingPage.cartItem.removeItemToCartbyProduct(productItem1);
         await header.isCorrectShoppingCartBadge(1);
 
         await productDetailsPage.goBackToListingPage();
 
         await productListingPage.goToDetailsPage(1);
         await productDetailsPage.isCorrectPage();
-        await productListingPage.cartItem.removeItemToCartbyProduct(
-          productItem2
-        );
+        await productListingPage.cartItem.removeItemToCartbyProduct(productItem2);
         await header.isCorrectShoppingCartBadge(0);
       });
 
@@ -144,10 +128,7 @@ test.describe('Able to add/remove cart items', () => {
 
       await test.step(`go to homepage`, async () => {
         await loginPage.goToLoginPage();
-        await loginPage.submitLogin(
-          `${process.env.USER_USERNAME}`,
-          `${process.env.USER_PASSWORD}`
-        );
+        await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
         await productListingPage.isCorrectPage();
       });
 
@@ -194,10 +175,7 @@ test.describe('Able to add/remove cart items', () => {
 
     await test.step(`go to homepage`, async () => {
       await loginPage.goToLoginPage();
-      await loginPage.submitLogin(
-        `${process.env.USER_USERNAME}`,
-        `${process.env.USER_PASSWORD}`
-      );
+      await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
       await productListingPage.isCorrectPage();
     });
 
@@ -213,18 +191,8 @@ test.describe('Able to add/remove cart items', () => {
       await header.goToShoppingCartPage();
       await cartPage.isCorrectPage();
 
-      await cartPage.cartItem.isCorrectProductData(
-        productItem1,
-        false,
-        true,
-        0
-      );
-      await cartPage.cartItem.isCorrectProductData(
-        productItem2,
-        false,
-        true,
-        1
-      );
+      await cartPage.cartItem.isCorrectProductData(productItem1, false, true, 0);
+      await cartPage.cartItem.isCorrectProductData(productItem2, false, true, 1);
     });
   });
 });
@@ -247,10 +215,7 @@ test(
 
     await test.step(`go to homepage`, async () => {
       await loginPage.goToLoginPage();
-      await loginPage.submitLogin(
-        `${process.env.USER_USERNAME}`,
-        `${process.env.USER_PASSWORD}`
-      );
+      await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
       await productListingPage.isCorrectPage();
     });
 
@@ -274,10 +239,7 @@ test(
       await cartPage.cartItem.isCorrectProductData(productItem1, false, true);
       await cartPage.cartItem.isCorrectProductData(productItem2, false, true);
 
-      shoppingCartData = await cartPage.getShoppingCartData([
-        productItem1,
-        productItem2
-      ]);
+      shoppingCartData = await cartPage.getShoppingCartData([productItem1, productItem2]);
     });
 
     await test.step(`go to Cart - Checkout page`, async () => {
@@ -331,10 +293,7 @@ test(
 
     await test.step(`go to homepage`, async () => {
       await loginPage.goToLoginPage();
-      await loginPage.submitLogin(
-        `${process.env.USER_USERNAME}`,
-        `${process.env.USER_PASSWORD}`
-      );
+      await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
       await productListingPage.isCorrectPage();
     });
 
@@ -360,10 +319,7 @@ test(
     await test.step(`log out then log in again`, async () => {
       await header.goToLogout();
 
-      await loginPage.submitLogin(
-        `${process.env.USER_USERNAME}`,
-        `${process.env.USER_PASSWORD}`
-      );
+      await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
       await productListingPage.isCorrectPage();
     });
 

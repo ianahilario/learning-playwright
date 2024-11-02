@@ -14,9 +14,7 @@ export class CartCheckoutPage {
     this.pageTitle = this.page.locator('//span[@data-test="title"]');
     this.firstNameField = this.page.locator('//input[@data-test="firstName"]');
     this.lastNameField = this.page.locator('//input[@data-test="lastName"]');
-    this.postalCodeField = this.page.locator(
-      '//input[@data-test="postalCode"]'
-    );
+    this.postalCodeField = this.page.locator('//input[@data-test="postalCode"]');
     this.cartReviewButton = this.page.locator('//input[@data-test="continue"]');
   }
 
@@ -27,9 +25,7 @@ export class CartCheckoutPage {
 
   //Assertion
   async isCorrectPage() {
-    await expect(this.page).toHaveURL(
-      'https://www.saucedemo.com/checkout-step-one.html'
-    );
+    await expect(this.page).toHaveURL('https://www.saucedemo.com/checkout-step-one.html');
     await expect(this.page).toHaveTitle('Swag Labs');
     await expect(this.pageTitle).toHaveText('Checkout: Your Information');
   }

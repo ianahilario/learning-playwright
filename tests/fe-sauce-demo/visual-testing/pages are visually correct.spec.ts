@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { test } from '../../../fixtures/testBase';
+import { test } from '../../../fixtures/sauce-demo';
 
 test(
   'visual testing',
@@ -20,22 +20,15 @@ test(
       await loginPage.goToLoginPage();
       await page.evaluate(() => window.scrollTo(0, 0));
       await page.waitForFunction('window.scrollY === 0');
-      await expect
-        .soft(page)
-        .toHaveScreenshot({ fullPage: true, maxDiffPixelRatio: 0.2 });
-      await loginPage.submitLogin(
-        `${process.env.USER_USERNAME}`,
-        `${process.env.USER_PASSWORD}`
-      );
+      await expect.soft(page).toHaveScreenshot({ fullPage: true, maxDiffPixelRatio: 0.2 });
+      await loginPage.submitLogin(`${process.env.USER_USERNAME}`, `${process.env.USER_PASSWORD}`);
     });
 
     await test.step(`product listing page`, async () => {
       await productListingPage.isCorrectPage();
       await page.evaluate(() => window.scrollTo(0, 0));
       await page.waitForFunction('window.scrollY === 0');
-      await expect
-        .soft(page)
-        .toHaveScreenshot({ fullPage: true, maxDiffPixelRatio: 0.2 });
+      await expect.soft(page).toHaveScreenshot({ fullPage: true, maxDiffPixelRatio: 0.2 });
     });
 
     await test.step(`product details page`, async () => {
@@ -43,9 +36,7 @@ test(
       await productDetailsPage.isCorrectPage();
       await page.evaluate(() => window.scrollTo(0, 0));
       await page.waitForFunction('window.scrollY === 0');
-      await expect
-        .soft(page)
-        .toHaveScreenshot({ fullPage: true, maxDiffPixelRatio: 0.2 });
+      await expect.soft(page).toHaveScreenshot({ fullPage: true, maxDiffPixelRatio: 0.2 });
       await productDetailsPage.cartItem.addItemToCartbyIndex();
     });
 
@@ -54,9 +45,7 @@ test(
       await cartPage.isCorrectPage();
       await page.evaluate(() => window.scrollTo(0, 0));
       await page.waitForFunction('window.scrollY === 0');
-      await expect
-        .soft(page)
-        .toHaveScreenshot({ fullPage: true, maxDiffPixelRatio: 0.2 });
+      await expect.soft(page).toHaveScreenshot({ fullPage: true, maxDiffPixelRatio: 0.2 });
     });
 
     await test.step(`cart checkout page`, async () => {
@@ -64,9 +53,7 @@ test(
       await cartCheckoutPage.isCorrectPage();
       await page.evaluate(() => window.scrollTo(0, 0));
       await page.waitForFunction('window.scrollY === 0');
-      await expect
-        .soft(page)
-        .toHaveScreenshot({ fullPage: true, maxDiffPixelRatio: 0.2 });
+      await expect.soft(page).toHaveScreenshot({ fullPage: true, maxDiffPixelRatio: 0.2 });
       await cartCheckoutPage.fillCheckoutForm();
     });
 
@@ -75,9 +62,7 @@ test(
       await cartReviewPage.isCorrectPage();
       await page.evaluate(() => window.scrollTo(0, 0));
       await page.waitForFunction('window.scrollY === 0');
-      await expect
-        .soft(page)
-        .toHaveScreenshot({ fullPage: true, maxDiffPixelRatio: 0.2 });
+      await expect.soft(page).toHaveScreenshot({ fullPage: true, maxDiffPixelRatio: 0.2 });
     });
 
     await test.step(`confirmation page`, async () => {
@@ -85,9 +70,7 @@ test(
       await cartConfirmationPage.isCorrectPage();
       await page.evaluate(() => window.scrollTo(0, 0));
       await page.waitForFunction('window.scrollY === 0');
-      await expect
-        .soft(page)
-        .toHaveScreenshot({ fullPage: false, maxDiffPixelRatio: 0.2 });
+      await expect.soft(page).toHaveScreenshot({ fullPage: false, maxDiffPixelRatio: 0.2 });
     });
   }
 );

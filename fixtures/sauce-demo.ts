@@ -1,13 +1,13 @@
 import { test as base } from '@playwright/test';
 import { APIResponse } from '@playwright/test';
-import { LoginPage } from '../models/pages/Login.page';
-import { HeaderPage } from '../models/pages/Header.page';
-import { ProductListingPage } from '../models/pages/ProductListing.page';
-import { ProductDetailsPage } from '../models/pages/ProductDetails.page';
-import { CartPage } from '../models/pages/Cart.page';
-import { CartCheckoutPage } from '../models/pages/CartCheckout.page';
-import { CartReviewPage } from '../models/pages/CartReview.page';
-import { CartConfirmationPage } from '../models/pages/CartConfirmation.page';
+import { ProductListingPage } from '../models/pages/product-listing.page';
+import { ProductDetailsPage } from '../models/pages/product-details.page';
+import { CartCheckoutPage } from '../models/pages/cart-checkout.page';
+import { CartReviewPage } from '../models/pages/cart-review.page';
+import { CartConfirmationPage } from '../models/pages/cart-confirmation.page';
+import { LoginPage } from '../models/pages/login.page';
+import { HeaderPage } from '../models/pages/header.page';
+import { CartPage } from '../models/pages/cart.page';
 
 interface testFixtures {
   loginPage: LoginPage;
@@ -67,9 +67,7 @@ test.afterEach(async ({ request }, testInfo) => {
       })
       .then(async (response: APIResponse) => {
         console.log(`JIRA Webhook Response Status: ${response.status()}`);
-        console.log(
-          `JIRA Webhook Response Body: ${JSON.stringify(response.body())}`
-        );
+        console.log(`JIRA Webhook Response Body: ${JSON.stringify(response.body())}`);
       });
   }
 });
