@@ -13,7 +13,10 @@ export class LoginPage extends BasePage {
     this.loginButton = this.page.locator('//*[@data-test="login-submit"]');
   }
 
-  async loginAsCustomer(email: string, password: string) {
+  async loginAsCustomer(
+    email: string = process.env.USER_CUSTOMER_EMAIL as string,
+    password: string = process.env.USER_CUSTOMER_PASSWORD as string
+  ) {
     await this.submitLogin(email, password);
     await this.waitForPageToLoad(/\/account/);
   }
