@@ -8,4 +8,10 @@ export class BasePage {
     this.page = page;
     this.isMobile = isMobile;
   }
+
+  async waitForPageToLoad(url: string | RegExp) {
+    await this.page.waitForURL(url);
+    await this.page.waitForLoadState();
+    await this.page.waitForLoadState('domcontentloaded');
+  }
 }
