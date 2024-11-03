@@ -21,6 +21,7 @@ class Header extends BasePage {
   readonly categoriesMenu: Locator;
   readonly contactLink: Locator;
   readonly signInLink: Locator;
+  readonly userMenu: Locator;
   readonly languageSelector: Locator;
 
   constructor(page: Page, isMobile: boolean) {
@@ -31,10 +32,12 @@ class Header extends BasePage {
     this.categoriesMenu = this.header.locator('//*[@data-test="nav-categories"]');
     this.contactLink = this.header.locator('//*[@data-test="nav-contact"]');
     this.signInLink = this.header.locator('//*[@data-test="nav-sign-in"]');
+    this.userMenu = this.header.locator('//*[@data-test="nav-menu"]');
     this.languageSelector = this.header.locator('//*[@id="language"]');
   }
 
   async gotoLogin() {
     await this.signInLink.click();
+    await this.waitForPageToLoad(/\/auth\/login/);
   }
 }
