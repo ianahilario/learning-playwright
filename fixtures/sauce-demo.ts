@@ -67,7 +67,9 @@ test.afterEach(async ({ request }, testInfo) => {
       })
       .then(async (response: APIResponse) => {
         console.log(`JIRA Webhook Response Status: ${response.status()}`);
-        console.log(`JIRA Webhook Response Body: ${JSON.stringify(response.body())}`);
+        console.log(
+          `JIRA Webhook Response Body: ${JSON.stringify(response.body())}`
+        );
       });
   }
 });

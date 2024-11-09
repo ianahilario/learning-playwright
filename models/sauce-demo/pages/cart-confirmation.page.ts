@@ -12,7 +12,9 @@ export class CartConfirmationPage {
     this.pageTitle = this.page.locator('//span[@data-test="title"]');
     this.headingText = this.page.locator('//h2[@data-test="complete-header"]');
     this.bodyText = this.page.locator('//div[@data-test="complete-text"]');
-    this.homeButton = this.page.locator('//button[@data-test="back-to-products"]');
+    this.homeButton = this.page.locator(
+      '//button[@data-test="back-to-products"]'
+    );
   }
 
   //Navigation
@@ -22,7 +24,9 @@ export class CartConfirmationPage {
 
   //Assertion
   async isCorrectPage() {
-    await expect(this.page).toHaveURL('https://www.saucedemo.com/checkout-complete.html');
+    await expect(this.page).toHaveURL(
+      'https://www.saucedemo.com/checkout-complete.html'
+    );
     await expect(this.page).toHaveTitle('Swag Labs');
     await expect(this.pageTitle).toHaveText('Checkout: Complete!');
   }

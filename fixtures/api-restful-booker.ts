@@ -1,4 +1,10 @@
-import { APIRequestContext, APIResponse, test as base, request, Request } from '@playwright/test';
+import {
+  APIRequestContext,
+  APIResponse,
+  test as base,
+  request,
+  Request
+} from '@playwright/test';
 
 interface testFixtures {
   request: Request;
@@ -19,7 +25,9 @@ export const test = base.extend<testFixtures>({
         }
       })
       .then(async (response: APIResponse) => {
-        console.log(`ResfulBooking /auth response: ${JSON.stringify(await response.json())}`);
+        console.log(
+          `ResfulBooking /auth response: ${JSON.stringify(await response.json())}`
+        );
         const token: string = (await response.json()).token;
         const contextOptions = {
           extraHTTPHeaders: {

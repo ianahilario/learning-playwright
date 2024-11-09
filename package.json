@@ -14,7 +14,8 @@
     "test-full-ci": "npx playwright test --project=full-chrome --project=full-firefox --project=full-safari",
     "test-visual-ci": "npx playwright test --project=visual-desktop-chrome --project=visual-desktop-safari --project=visual-mobile-android --project=visual-mobile-iphone",
     "test-pst": "npx playwright test tests/practice-software-testing --ui",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "fix": "eslint --quiet --fix . && prettier --write ."
   },
   "lint-staged": {
     "**/**.{ts}": [

@@ -17,7 +17,9 @@ class ProductListing extends BasePage {
 
   constructor(page: Page, isMobile: boolean) {
     super(page, isMobile);
-    this.productTiles = this.page.locator('//*[contains(@data-test,"product-") and @class="card"]');
+    this.productTiles = this.page.locator(
+      '//*[contains(@data-test,"product-") and @class="card"]'
+    );
   }
 
   async gotoProductDetailsPage() {
@@ -33,7 +35,12 @@ class ProductListing extends BasePage {
   }
 
   private async waitForProductListingToLoad() {
-    const loadingSkeleton: Locator = this.page.locator('//*[@class="card skeleton"]');
-    await expect(loadingSkeleton, 'Waiting for loading skeleton to disappear...').toHaveCount(0, { timeout: 10_000 });
+    const loadingSkeleton: Locator = this.page.locator(
+      '//*[@class="card skeleton"]'
+    );
+    await expect(
+      loadingSkeleton,
+      'Waiting for loading skeleton to disappear...'
+    ).toHaveCount(0, { timeout: 10_000 });
   }
 }

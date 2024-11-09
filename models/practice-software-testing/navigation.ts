@@ -31,7 +31,9 @@ class Header extends BasePage {
     this.header = this.page.locator('//app-header');
     this.brandLogo = this.header.locator('//*[@class="navbar-brand"]');
     this.homeLink = this.header.locator('//*[@data-test="nav-home"]');
-    this.categoriesMenu = this.header.locator('//*[@data-test="nav-categories"]');
+    this.categoriesMenu = this.header.locator(
+      '//*[@data-test="nav-categories"]'
+    );
     this.contactLink = this.header.locator('//*[@data-test="nav-contact"]');
     this.signInLink = this.header.locator('//*[@data-test="nav-sign-in"]');
     this.userMenu = this.header.locator('//*[@data-test="nav-menu"]');
@@ -51,7 +53,13 @@ class Header extends BasePage {
   }
 
   async gotoUserMenu(
-    menuOption: 'my-account' | 'my-favorites' | 'my-profile' | 'my-invoices' | 'my-messages' | 'sign-out'
+    menuOption:
+      | 'my-account'
+      | 'my-favorites'
+      | 'my-profile'
+      | 'my-invoices'
+      | 'my-messages'
+      | 'sign-out'
   ) {
     await this.userMenu.click();
     await this.page.locator(`//*[@data-test="nav-${menuOption}"]`).click();
@@ -88,7 +96,9 @@ class Header extends BasePage {
   async getCartQuantity(): Promise<number> {
     let cartQuantity = 0;
     if (await this.cartQuantity.isVisible()) {
-      cartQuantity = parseInt((await this.cartQuantity.textContent()) as string);
+      cartQuantity = parseInt(
+        (await this.cartQuantity.textContent()) as string
+      );
     }
 
     return cartQuantity;

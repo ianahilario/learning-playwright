@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import js from '@eslint/js';
 import { FlatCompat } from '@eslint/eslintrc';
 import stylisticJs from '@stylistic/eslint-plugin-js';
-import playwright from 'eslint-plugin-playwright'
+import playwright from 'eslint-plugin-playwright';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,13 +25,13 @@ export default [
     files: ['tests/**'],
     rules: {
       ...playwright.configs['flat/recommended'].rules,
-      "playwright/expect-expect": [
-      "error",
-      {
-        "assertFunctionNames": ["isCorrectProductData", "isCorrectSorting"]
-      }
-    ]
-    },
+      'playwright/expect-expect': [
+        'error',
+        {
+          assertFunctionNames: ['isCorrectProductData', 'isCorrectSorting']
+        }
+      ]
+    }
   },
   {
     plugins: {
@@ -64,7 +64,7 @@ export default [
           objects: 'always-multiline',
           imports: 'never',
           exports: 'never',
-          functions: 'never'
+          functions: 'always-multiline'
         }
       ],
       'space-infix-ops': ['error'],
@@ -73,13 +73,13 @@ export default [
       '@typescript-eslint/no-floating-promises': 'error',
       '@typescript-eslint/no-unused-expressions': 'warn',
       '@typescript-eslint/await-thenable': 'error',
-      "jest/expect-expect": [
-        "error",
+      'jest/expect-expect': [
+        'error',
         {
-          "assertFunctionNames": ["expect"],
-          "additionalTestBlockFunctions": []
+          assertFunctionNames: ['expect'],
+          additionalTestBlockFunctions: []
         }
-  ]
+      ]
     }
   }
 ];
