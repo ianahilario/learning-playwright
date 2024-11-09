@@ -22,6 +22,8 @@ class Header extends BasePage {
   readonly contactLink: Locator;
   readonly signInLink: Locator;
   readonly userMenu: Locator;
+  readonly cartLink: Locator;
+  readonly cartQuantity: Locator;
   readonly languageSelector: Locator;
 
   constructor(page: Page, isMobile: boolean) {
@@ -33,11 +35,62 @@ class Header extends BasePage {
     this.contactLink = this.header.locator('//*[@data-test="nav-contact"]');
     this.signInLink = this.header.locator('//*[@data-test="nav-sign-in"]');
     this.userMenu = this.header.locator('//*[@data-test="nav-menu"]');
+    this.cartLink = this.header.locator('//*[@data-test="nav-cart"]');
+    this.cartQuantity = this.header.locator('//*[@data-test="cart-quantity"]');
     this.languageSelector = this.header.locator('//*[@id="language"]');
   }
 
   async gotoLogin() {
     await this.signInLink.click();
     await this.waitForPageToLoad(/\/auth\/login/);
+  }
+
+  async gotoHomepage() {
+    await this.brandLogo.click();
+    await this.waitForPageToLoad(process.env.BASE_URL as string);
+  }
+
+  async gotoUserMenu(
+    menuOption: 'my-account' | 'my-favorites' | 'my-profile' | 'my-invoices' | 'my-messages' | 'sign-out'
+  ) {
+    await this.userMenu.click();
+    await this.page.locator(`//*[@data-test="nav-${menuOption}"]`).click();
+
+    switch (menuOption) {
+      case 'my-account':
+        await this.waitForPageToLoad(/\/account$/);
+        break;
+      case 'my-favorites':
+        await this.waitForPageToLoad(/\/account\/favorites$/);
+        break;
+      case 'my-profile':
+        await this.waitForPageToLoad(/\/account\/profile$/);
+        break;
+      case 'my-invoices':
+        await this.waitForPageToLoad(/\/account\/invoices$/);
+        break;
+      case 'my-messages':
+        await this.waitForPageToLoad(/\/account\/messages$/);
+        break;
+      case 'sign-out':
+        await this.waitForPageToLoad(/\/account\/auth\/login$/);
+        break;
+      default:
+        break;
+    }
+  }
+
+  async gotoCartPage() {
+    await this.cartLink.click();
+    await this.waitForPageToLoad(/\/checkout/);
+  }
+
+  async getCartQuantity(): Promise<number> {
+    let cartQuantity = 0;
+    if (await this.cartQuantity.isVisible()) {
+      cartQuantity = parseInt((await this.cartQuantity.textContent()) as string);
+    }
+
+    return cartQuantity;
   }
 }

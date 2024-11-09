@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../../fixtures/practice-software-testing';
 
-test('should should show non-logged in state', async ({ navigation, homepage }) => {
+test('should show non-logged in state', async ({ navigation, homepage }) => {
   await test.step(`go to homepage`, async () => {
     await navigation.gotoHomepageviaURL();
   });
