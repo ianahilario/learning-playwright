@@ -6,8 +6,13 @@ test.describe('monkey testing', () => {
   test.beforeEach(async ({ page }) => {
     errors.length = 0;
 
+    page.on('console', (err) => {
+      if (err.type() === 'error') {
+        errors.push(['console', err.text()]);
+      }
+    });
+
     page.on('pageerror', (err) => {
-      console.log('monkey test error: pageerror', err.message);
       errors.push(['pageerror', err.message]);
     });
 
