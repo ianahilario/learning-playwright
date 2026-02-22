@@ -29,8 +29,8 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    ['json', { outputFile: './playwright-report/report.json' }],
-    ['html', { outputDir: './playwright-report' }]
+    ['html', { outputDir: './playwright-report' }],
+    ['json', { outputFile: './playwright-report/test-results.json' }]
   ],
   maxFailures: process.env.CI ? 9 : undefined,
   snapshotPathTemplate:
