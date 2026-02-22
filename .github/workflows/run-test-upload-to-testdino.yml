@@ -41,4 +41,4 @@ jobs:
           retention-days: 30
       - name: Upload to TestDino
         if: always()
-        run: npx tdpw upload ./playwright-report --token="${{ secrets.TESTDINO_TOKEN }}" --upload-html
+        run: npx tdpw upload ./playwright-report --token="${{ secrets.TESTDINO_TOKEN }}" --upload-html --upload-videos --upload-traces
