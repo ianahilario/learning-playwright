@@ -28,7 +28,10 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [
+    ['json', { outputFile: './playwright-report/report.json' }],
+    ['html', { outputDir: './playwright-report' }]
+  ],
   maxFailures: process.env.CI ? 9 : undefined,
   snapshotPathTemplate:
     '.visual-test-snapshots/{projectName}/{testFilePath}/{arg}{ext}',
