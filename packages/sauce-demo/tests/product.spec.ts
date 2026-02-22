@@ -1,10 +1,11 @@
 import { Product } from '../interfaces/data-objects';
 import { test } from '../fixtures/sauce-demo';
 import { expect } from 'playwright/test';
+import { Tags, Teams, TestTags } from '../../../commons/test-tags';
 
 test(
   'should show same product details in Listing and Details',
-  { tag: '@p1' },
+  { tag: TestTags.setTestTags({ team: Teams.TEAM_NAME, tags: [Tags.SMOKE] }) },
   async ({ loginPage, productListingPage, productDetailsPage }) => {
     let product: Product;
 

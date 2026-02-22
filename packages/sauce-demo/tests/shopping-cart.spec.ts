@@ -1,10 +1,13 @@
+import { Tags, Teams, TestTags } from '../../../commons/test-tags';
 import { test } from '../fixtures/sauce-demo';
 import { Product, ShoppingCart } from '../interfaces/data-objects';
 
 test.describe('Able to add/remove cart items', () => {
   test(
     'should allow to add/remove from the Product Listing page',
-    { tag: '@p1' },
+    {
+      tag: TestTags.setTestTags({ team: Teams.TEAM_NAME, tags: [Tags.SMOKE] })
+    },
     async ({ loginPage, header, productListingPage, cartPage }) => {
       let productItem1: Product;
       let productItem2: Product;
@@ -58,7 +61,9 @@ test.describe('Able to add/remove cart items', () => {
 
   test(
     'should allow to add/remove from the Product Details page',
-    { tag: '@p1' },
+    {
+      tag: TestTags.setTestTags({ team: Teams.TEAM_NAME, tags: [Tags.SMOKE] })
+    },
     async ({
       loginPage,
       header,
@@ -137,7 +142,9 @@ test.describe('Able to add/remove cart items', () => {
 
   test(
     'should allow to add/remove from the Cart page',
-    { tag: '@p1' },
+    {
+      tag: TestTags.setTestTags({ team: Teams.TEAM_NAME, tags: [Tags.SMOKE] })
+    },
     async ({ loginPage, header, productListingPage, cartPage }) => {
       let productItem1;
       let productItem2;
@@ -231,7 +238,7 @@ test.describe('Able to add/remove cart items', () => {
 
 test(
   'should checkout the cart item successfully',
-  { tag: '@p1' },
+  { tag: TestTags.setTestTags({ team: Teams.TEAM_NAME, tags: [Tags.SMOKE] }) },
   async ({
     loginPage,
     header,
@@ -324,7 +331,7 @@ test(
 
 test(
   'should persist cart item when user logs out',
-  { tag: '@p1' },
+  { tag: TestTags.setTestTags({ team: Teams.TEAM_NAME, tags: [Tags.SMOKE] }) },
   async ({ loginPage, header, productListingPage, cartPage }) => {
     let productItem1;
     let productItem2;
