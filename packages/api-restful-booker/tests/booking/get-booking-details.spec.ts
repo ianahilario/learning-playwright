@@ -2,21 +2,33 @@ import { expect } from '@playwright/test';
 import { test } from '../../fixtures/api-restful-booker';
 
 test('able to get return booking details', async ({ restfulBookerApi }) => {
-  const responseBody =
-    await restfulBookerApi.bookingDetails.getBookingDetails('1');
+  const booking = await restfulBookerApi.bookingCreate.createBooking();
+  const responseBody = await restfulBookerApi.bookingDetails.getBookingDetails(
+    booking.bookingid.toString()
+  );
   console.log(responseBody);
 
-  expect.soft(responseBody).toHaveProperty('firstname', 'Sally');
-  expect.soft(responseBody).toHaveProperty('lastname', 'Brown');
-  expect.soft(responseBody).toHaveProperty('totalprice', 290);
-  expect.soft(responseBody).toHaveProperty('depositpaid', true);
+  expect
+    .soft(responseBody)
+    .toHaveProperty('firstname', booking.booking.firstname);
+  expect
+    .soft(responseBody)
+    .toHaveProperty('lastname', booking.booking.lastname);
+  expect
+    .soft(responseBody)
+    .toHaveProperty('totalprice', booking.booking.totalprice);
+  expect
+    .soft(responseBody)
+    .toHaveProperty('depositpaid', booking.booking.depositpaid);
   expect
     .soft(responseBody.bookingdates)
-    .toHaveProperty('checkin', '2019-07-11');
+    .toHaveProperty('checkin', booking.booking.bookingdates.checkin);
   expect
     .soft(responseBody.bookingdates)
-    .toHaveProperty('checkout', '2022-02-06');
-  expect.soft(responseBody).toHaveProperty('additionalneeds', 'Breakfast');
+    .toHaveProperty('checkout', booking.booking.bookingdates.checkout);
+  expect
+    .soft(responseBody)
+    .toHaveProperty('additionalneeds', booking.booking.additionalneeds);
 });
 
 test('able to handle non-existing booking id', async ({ restfulBookerApi }) => {

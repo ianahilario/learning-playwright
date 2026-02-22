@@ -4,16 +4,19 @@ import { BookingDetailsAPI } from './bookings/get-booking-details';
 import { sendAPIRequest } from '../../../commons/api';
 import { getEnv } from '../../../commons/utils';
 import { BookingCreateAPI } from './bookings/create-booking';
+import { PingAPI } from './health-check/get-ping';
 
 export class ResfulBookerAPIs {
   readonly apiRequestContext: APIRequestContext;
   readonly bookingDetails: BookingDetailsAPI;
   readonly bookingCreate: BookingCreateAPI;
+  readonly ping: PingAPI;
 
   constructor(apiRequestContext: APIRequestContext) {
     this.apiRequestContext = apiRequestContext;
     this.bookingDetails = new BookingDetailsAPI(apiRequestContext);
     this.bookingCreate = new BookingCreateAPI(apiRequestContext);
+    this.ping = new PingAPI(apiRequestContext);
   }
 }
 
