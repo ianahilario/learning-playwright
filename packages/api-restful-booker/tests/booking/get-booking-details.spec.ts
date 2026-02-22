@@ -1,13 +1,9 @@
 import { expect } from '@playwright/test';
 import { test } from '../../fixtures/api-restful-booker';
 
-test('able to get return booking details', async ({ request }) => {
-  const response = await request.get(`${process.env.API_BASE_URL}/booking/1`);
-  console.log(await response.json());
-
-  expect(response.ok()).toBeTruthy();
-  expect(response.status()).toBe(200);
-  const responseBody = await response.json();
+test('able to get return booking details', async ({ restfulBookerApi }) => {
+  const responseBody =
+    await restfulBookerApi.bookingDetails.getBookingDetails('1');
   console.log(responseBody);
 
   expect.soft(responseBody).toHaveProperty('firstname', 'Sally');

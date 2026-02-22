@@ -8,11 +8,7 @@ import dotenv from 'dotenv';
 // require('dotenv').config();
 
 dotenv.config({
-  path: [
-    `./.env.runner`,
-    `./.packages/${process.env.APP_UNDER_TEST as string}/test-data/.env`,
-    `./.packages/${process.env.APP_UNDER_TEST as string}/test-data/.env.secret`
-  ]
+  path: [`./.env.secret`]
 });
 
 /**
