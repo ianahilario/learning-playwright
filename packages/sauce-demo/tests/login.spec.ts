@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from '../fixtures/sauce-demo';
-import { TAG_P1 } from '../../../commons/test-tag-manager';
+import { Tags, Teams, TestTags } from '../../../commons/test-tags';
 
 test('should show errror when login fails', async ({ page, loginPage }) => {
   await test.step(`go to homepage`, async () => {
@@ -26,7 +26,7 @@ test('should show errror when login fails', async ({ page, loginPage }) => {
 
 test(
   'should login successfully',
-  { tag: TAG_P1 },
+  { tag: TestTags.setTestTags({ team: Teams.TEAM_NAME, tags: [Tags.SMOKE] }) },
   async ({ loginPage, productListingPage, page }) => {
     await test.step(`go to homepage`, async () => {
       await loginPage.goToLoginPage();
