@@ -8,6 +8,7 @@ import { CartPage } from '../pom/pages/cart.page';
 import { CartCheckoutPage } from '../pom/pages/cart-checkout.page';
 import { CartReviewPage } from '../pom/pages/cart-review.page';
 import { CartConfirmationPage } from '../pom/pages/cart-confirmation.page';
+import AxeBuilder from '@axe-core/playwright';
 
 interface TestFixtures {
   loginPage: LoginPage;
@@ -18,6 +19,7 @@ interface TestFixtures {
   cartCheckoutPage: CartCheckoutPage;
   cartReviewPage: CartReviewPage;
   cartConfirmationPage: CartConfirmationPage;
+  axeBuilder: AxeBuilder;
 }
 
 export const test = base.extend<TestFixtures>({
@@ -44,6 +46,16 @@ export const test = base.extend<TestFixtures>({
   },
   cartConfirmationPage: async ({ page }, use) => {
     await use(new CartConfirmationPage(page));
+  },
+  axeBuilder: async ({ page }, use) => {
+    const makeAxeBuilder = await new AxeBuilder({ page }).withTags([
+      'wcag2a',
+      'wcag2aa',
+      'wcag21a',
+      'wcag21aa'
+    ]);
+
+    await use(makeAxeBuilder);
   }
 });
 

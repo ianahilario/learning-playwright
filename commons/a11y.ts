@@ -3,15 +3,15 @@ import test, { expect, Locator } from '@playwright/test';
 import { createHtmlReport } from 'axe-html-reporter';
 
 export class A11Y {
-  static async runAccessibilityTest(options: {
-    axeBuilder: AxeBuilder;
-    pageOrElementName: string;
-  }) {
+  static async runAccessibilityTest(
+    axeBuilder: AxeBuilder,
+    pageOrElementName: string
+  ) {
     await test.step('Verify that there are no automatically detectable WCAG violations', async (step) => {
-      const pageTitle = options.pageOrElementName;
+      const pageTitle = pageOrElementName;
       const reportFileName = await this.generateHTMLReportFileName(pageTitle);
 
-      const accessibilityScanResults = await options.axeBuilder.analyze();
+      const accessibilityScanResults = await axeBuilder.analyze();
 
       await createHtmlReport({
         results: accessibilityScanResults,
