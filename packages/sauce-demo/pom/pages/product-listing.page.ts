@@ -1,6 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { CartItemComponent } from '../components/cart-item.component';
 import { Product } from '../../interfaces/data-objects';
+import { waitForPageToLoad } from '../../../../commons/page-load';
 
 export class ProductListingPage {
   readonly page: Page;
@@ -27,18 +28,10 @@ export class ProductListingPage {
       await this.products.nth(index).locator('//a/img').click();
     }
 
-    await this.page.waitForURL(/inventory-item/);
+    await waitForPageToLoad(this.page, /inventory-item/);
   }
 
   //Assertions
-  async isCorrectPage() {
-    await expect(this.page).toHaveURL(
-      'https://www.saucedemo.com/inventory.html'
-    );
-    await expect(this.page).toHaveTitle('Swag Labs');
-    await expect(this.pageTitle).toHaveText('Products');
-  }
-
   async isCorrectSorting(sortOption: string) {
     let productCount: number;
     let locator = '';

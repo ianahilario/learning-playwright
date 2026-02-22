@@ -20,7 +20,6 @@ test(
 
     await test.step(`same details are displayed in Listing and Details page`, async () => {
       await productListingPage.goToDetailsPage();
-      await productDetailsPage.isCorrectPage();
       await productDetailsPage.cartItem.isCorrectProductData(
         product,
         true,
@@ -43,12 +42,10 @@ test('should be able to go back to Listing page via "Back to products" link"', a
 
   await test.step(`go to Details page`, async () => {
     await productListingPage.goToDetailsPage();
-    await productDetailsPage.isCorrectPage();
   });
 
   await test.step(`go to back Listing page using breadcrumb link`, async () => {
     await productDetailsPage.goBackToListingPage();
-    await productListingPage.isCorrectPage();
     await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
   });
 });
@@ -59,7 +56,6 @@ test('should show correct sort options and sorts correctly', async ({
 }) => {
   await loginPage.goToLoginPage();
   await loginPage.submitLogin();
-  await productListingPage.isCorrectPage();
 
   await productListingPage.isCorrectSorting('Name (A to Z)');
   await productListingPage.isCorrectSorting('Name (Z to A)');

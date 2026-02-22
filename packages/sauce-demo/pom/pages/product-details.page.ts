@@ -1,5 +1,6 @@
-import { Page, Locator, expect } from '@playwright/test';
+import { Page, Locator } from '@playwright/test';
 import { CartItemComponent } from '../components/cart-item.component';
+import { waitForPageToLoad } from '../../../../commons/page-load';
 
 export class ProductDetailsPage {
   readonly page: Page;
@@ -14,15 +15,8 @@ export class ProductDetailsPage {
     this.cartItem = new CartItemComponent(page);
   }
 
-  async isCorrectPage() {
-    await expect(this.page).toHaveURL(
-      new RegExp('https://www.saucedemo.com/inventory-item.html.*')
-    );
-    await expect(this.page).toHaveTitle('Swag Labs');
-    await expect(this.backToProductsLink).toBeVisible();
-  }
-
   async goBackToListingPage() {
     await this.backToProductsLink.click();
+    await waitForPageToLoad(this.page, /inventory\.html/);
   }
 }

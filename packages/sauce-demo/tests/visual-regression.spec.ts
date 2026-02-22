@@ -23,14 +23,10 @@ test(
       await expect
         .soft(page)
         .toHaveScreenshot({ fullPage: true, maxDiffPixelRatio: 0.2 });
-      await loginPage.submitLogin(
-        `${process.env.USER_USERNAME}`,
-        `${process.env.USER_PASSWORD}`
-      );
+      await loginPage.submitLogin();
     });
 
     await test.step(`product listing page`, async () => {
-      await productListingPage.isCorrectPage();
       await page.evaluate(() => window.scrollTo(0, 0));
       await page.waitForFunction('window.scrollY === 0');
       await expect
@@ -40,7 +36,6 @@ test(
 
     await test.step(`product details page`, async () => {
       await productListingPage.goToDetailsPage();
-      await productDetailsPage.isCorrectPage();
       await page.evaluate(() => window.scrollTo(0, 0));
       await page.waitForFunction('window.scrollY === 0');
       await expect

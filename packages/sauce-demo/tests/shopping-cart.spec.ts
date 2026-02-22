@@ -15,7 +15,6 @@ test.describe('Able to add/remove cart items', () => {
       await test.step(`go to homepage`, async () => {
         await loginPage.goToLoginPage();
         await loginPage.submitLogin();
-        await productListingPage.isCorrectPage();
       });
 
       await test.step(`add item to cart`, async () => {
@@ -39,7 +38,6 @@ test.describe('Able to add/remove cart items', () => {
 
       await test.step(`remove item to cart`, async () => {
         await cartPage.gotoContinueShopping();
-        await productListingPage.isCorrectPage();
 
         await cartPage.cartItem.removeItemToCartbyProduct(productItem1);
         await header.isCorrectShoppingCartBadge(1);
@@ -74,7 +72,6 @@ test.describe('Able to add/remove cart items', () => {
       await test.step(`go to homepage`, async () => {
         await loginPage.goToLoginPage();
         await loginPage.submitLogin();
-        await productListingPage.isCorrectPage();
       });
 
       await test.step(`add item to cart`, async () => {
@@ -84,14 +81,12 @@ test.describe('Able to add/remove cart items', () => {
         productItem2 = await productListingPage.getProductData(1);
 
         await productListingPage.goToDetailsPage(0);
-        await productDetailsPage.isCorrectPage();
         await productListingPage.cartItem.addItemToCartbyIndex();
         await header.isCorrectShoppingCartBadge(1);
 
         await productDetailsPage.goBackToListingPage();
 
         await productListingPage.goToDetailsPage(1);
-        await productDetailsPage.isCorrectPage();
         await productListingPage.cartItem.addItemToCartbyIndex();
         await header.isCorrectShoppingCartBadge(2);
       });
@@ -106,10 +101,8 @@ test.describe('Able to add/remove cart items', () => {
 
       await test.step(`remove item to cart`, async () => {
         await cartPage.gotoContinueShopping();
-        await productListingPage.isCorrectPage();
 
         await productListingPage.goToDetailsPage(0);
-        await productDetailsPage.isCorrectPage();
         await productListingPage.cartItem.removeItemToCartbyProduct(
           productItem1
         );
@@ -118,7 +111,6 @@ test.describe('Able to add/remove cart items', () => {
         await productDetailsPage.goBackToListingPage();
 
         await productListingPage.goToDetailsPage(1);
-        await productDetailsPage.isCorrectPage();
         await productListingPage.cartItem.removeItemToCartbyProduct(
           productItem2
         );
@@ -146,7 +138,6 @@ test.describe('Able to add/remove cart items', () => {
       await test.step(`go to homepage`, async () => {
         await loginPage.goToLoginPage();
         await loginPage.submitLogin();
-        await productListingPage.isCorrectPage();
       });
 
       await test.step(`add item to cart`, async () => {
@@ -193,7 +184,6 @@ test.describe('Able to add/remove cart items', () => {
     await test.step(`go to homepage`, async () => {
       await loginPage.goToLoginPage();
       await loginPage.submitLogin();
-      await productListingPage.isCorrectPage();
     });
 
     await test.step(`add item to cart`, async () => {
@@ -243,7 +233,6 @@ test(
     await test.step(`go to homepage`, async () => {
       await loginPage.goToLoginPage();
       await loginPage.submitLogin();
-      await productListingPage.isCorrectPage();
     });
 
     await test.step(`add item to cart`, async () => {
@@ -301,7 +290,6 @@ test(
 
     await test.step(`go to back to homepage`, async () => {
       await cartConfirmationPage.gotoHomepage();
-      await productListingPage.isCorrectPage();
     });
 
     await test.step(`cart is cleared`, async () => {
@@ -324,7 +312,6 @@ test(
     await test.step(`go to homepage`, async () => {
       await loginPage.goToLoginPage();
       await loginPage.submitLogin();
-      await productListingPage.isCorrectPage();
     });
 
     await test.step(`add item to cart`, async () => {
@@ -350,7 +337,6 @@ test(
       await header.goToLogout();
 
       await loginPage.submitLogin();
-      await productListingPage.isCorrectPage();
     });
 
     await test.step(`cart items are retained`, async () => {

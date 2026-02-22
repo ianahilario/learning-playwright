@@ -1,5 +1,6 @@
 import { Page, Locator } from '@playwright/test';
 import { UserTestData } from '../../test-data/users';
+import { waitForPageToLoad } from '../../../../commons/page-load';
 
 export class LoginPage {
   readonly page: Page;
@@ -26,6 +27,6 @@ export class LoginPage {
     await this.usernameField.fill(username);
     await this.passwordField.fill(password);
     await this.loginButton.click();
-    await this.page.waitForURL(/inventory/);
+    await waitForPageToLoad(this.page, /inventory/);
   }
 }
