@@ -5,15 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test --ui",
-    "test-problem-user": "USER_USERNAME=problem_user npx playwright test --ui",
-    "test-performance-glitch-user": "USER_USERNAME=performance_glitch_user npx playwright test --ui",
-    "test-error-user": "USER_USERNAME=error_user npx playwright test --ui",
-    "test-smoke": "npx playwright test --project=smoke --project=smoke-mobile --ui",
-    "test-smoke-ci": "npx playwright test --project=smoke --project=smoke-mobile",
-    "test-full": "npx playwright test --project=full-chrome --project=full-firefox --project=full-safari --ui",
-    "test-full-ci": "npx playwright test --project=full-chrome --project=full-firefox --project=full-safari",
-    "test-visual-ci": "npx playwright test --project=visual-desktop-chrome --project=visual-desktop-safari --project=visual-mobile-android --project=visual-mobile-iphone",
-    "test-pst": "npx playwright test tests/practice-software-testing --ui",
     "prepare": "husky install",
     "fix": "eslint --quiet --fix . && prettier --write ."
   },

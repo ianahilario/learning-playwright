@@ -1,15 +1,15 @@
 import { test as base } from '@playwright/test';
 import { APIResponse } from '@playwright/test';
-import { ProductListingPage } from '../models/sauce-demo/pages/product-listing.page';
-import { ProductDetailsPage } from '../models/sauce-demo/pages/product-details.page';
-import { CartCheckoutPage } from '../models/sauce-demo/pages/cart-checkout.page';
-import { CartReviewPage } from '../models/sauce-demo/pages/cart-review.page';
-import { CartConfirmationPage } from '../models/sauce-demo/pages/cart-confirmation.page';
-import { LoginPage } from '../models/sauce-demo/pages/login.page';
-import { HeaderPage } from '../models/sauce-demo/pages/header.page';
-import { CartPage } from '../models/sauce-demo/pages/cart.page';
+import { LoginPage } from '../pom/pages/login.page';
+import { HeaderPage } from '../pom/pages/header.page';
+import { ProductListingPage } from '../pom/pages/product-listing.page';
+import { ProductDetailsPage } from '../pom/pages/product-details.page';
+import { CartPage } from '../pom/pages/cart.page';
+import { CartCheckoutPage } from '../pom/pages/cart-checkout.page';
+import { CartReviewPage } from '../pom/pages/cart-review.page';
+import { CartConfirmationPage } from '../pom/pages/cart-confirmation.page';
 
-interface testFixtures {
+interface TestFixtures {
   loginPage: LoginPage;
   header: HeaderPage;
   productListingPage: ProductListingPage;
@@ -20,7 +20,7 @@ interface testFixtures {
   cartConfirmationPage: CartConfirmationPage;
 }
 
-export const test = base.extend<testFixtures>({
+export const test = base.extend<TestFixtures>({
   loginPage: async ({ page }, use) => {
     await use(new LoginPage(page));
   },

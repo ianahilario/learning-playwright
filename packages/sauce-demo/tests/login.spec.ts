@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
-import { test } from '../../fixtures/sauce-demo';
-import { TAG_P1 } from '../../utils/test-tag-manager';
+import { test } from '../fixtures/sauce-demo';
+import { TAG_P1 } from '../../../commons/test-tag-manager';
 
 test('should show errror when login fails', async ({ page, loginPage }) => {
   await test.step(`go to homepage`, async () => {

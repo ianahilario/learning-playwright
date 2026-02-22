@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { test } from '../../../fixtures/sauce-demo';
+import { test } from '../fixtures/sauce-demo';
 
 test(
   'visual testing',

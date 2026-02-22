@@ -10,16 +10,18 @@ import dotenv from 'dotenv';
 dotenv.config({
   path: [
     `./.env.runner`,
-    `./test-data/${process.env.APP_UNDER_TEST as string}/.env`,
-    `./test-data/${process.env.APP_UNDER_TEST as string}/.env.secret`
+    `./.packages/${process.env.APP_UNDER_TEST as string}/test-data/.env`,
+    `./.packages/${process.env.APP_UNDER_TEST as string}/test-data/.env.secret`
   ]
 });
 
 /**
  * See https://playwright.dev/docs/test-configuration.
+ * Note: testDir does not support glob patterns. Use a parent dir; Playwright searches recursively.
  */
 export default defineConfig({
-  testDir: './tests',
+  testDir: './packages',
+  testMatch: '**/tests/**/*.spec.ts',
   timeout: 5 * 60 * 1000,
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -48,59 +50,38 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'smoke',
-      grep: [/@p1/],
-      grepInvert: [/@visual/],
+      name: 'desktop-chrome',
       use: {
         ...devices['Desktop Chrome'],
-        video: 'on'
+        channel: 'chromium',
+        viewport: { width: 1280, height: 850 }
       }
     },
     {
-      name: 'smoke-mobile',
-      grep: [/@p1/],
-      grepInvert: [/@visual/],
-      use: {
-        ...devices['iPhone 14'],
-        isMobile: true,
-        video: 'on'
-      }
-    },
-    {
-      name: 'full-chrome',
-      grepInvert: [/@visual/],
-      use: { ...devices['Desktop Chrome'] }
-    },
-    {
-      name: 'full-firefox',
-      grepInvert: [/@visual/],
+      name: 'desktop-firefox',
+      grep: [/@cross-browser/],
       use: { ...devices['Desktop Firefox'] }
     },
     {
-      name: 'full-safari',
-      grepInvert: [/@visual/],
-      use: { ...devices['Desktop Safari'] }
-    },
-    //Visual testing
-    {
-      name: 'visual-desktop-chrome',
-      grep: [/@visual/],
-      use: { ...devices['Desktop Chrome'] }
-    },
-    {
-      name: 'visual-desktop-safari',
-      grep: [/@visual/],
+      name: 'desktop-safari',
+      grep: [/@cross-browser/],
       use: { ...devices['Desktop Safari'] }
     },
     {
-      name: 'visual-mobile-android',
-      grep: [/@visual/],
-      use: { ...devices['Galaxy S9+'] }
+      name: 'mobile-android',
+      grep: [/@mobile/],
+      use: {
+        ...devices['Galaxy S9+'],
+        viewport: { width: 360, height: 740 }
+      }
     },
     {
-      name: 'visual-mobile-iphone',
-      grep: [/@visual/],
-      use: { ...devices['iPhone 14'] }
+      name: 'mobile-ios',
+      grep: [/@mobile/],
+      use: {
+        ...devices['iPhone 15'],
+        viewport: { width: 360, height: 740 }
+      }
     }
 
     /* Test against mobile viewports. */

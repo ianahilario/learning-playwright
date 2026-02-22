@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { test } from '../../../fixtures/practice-software-testing';
+import { test } from '../fixtures/sauce-demo';
 
 const errors: [string, string][] = [];
 test.describe('monkey testing', () => {

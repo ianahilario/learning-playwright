@@ -1,6 +1,6 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { CartItemComponent } from '../components/cart-item.component';
-import { ShoppingCart } from '../../data/data-objects';
+import { ShoppingCart } from '../../interfaces/data-objects';
 
 export class CartReviewPage {
   readonly page: Page;

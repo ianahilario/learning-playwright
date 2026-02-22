@@ -1,5 +1,5 @@
-import { Product } from '../../models/data/data-objects';
-import { test } from '../../fixtures/sauce-demo';
+import { Product } from '../interfaces/data-objects';
+import { test } from '../fixtures/sauce-demo';
 import { expect } from 'playwright/test';
 
 test(

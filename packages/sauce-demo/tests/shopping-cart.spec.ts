@@ -1,5 +1,5 @@
-import { test } from '../../fixtures/sauce-demo';
-import { Product, ShoppingCart } from '../../models/data/data-objects';
+import { test } from '../fixtures/sauce-demo';
+import { Product, ShoppingCart } from '../interfaces/data-objects';
 
 test.describe('Able to add/remove cart items', () => {
   test(
