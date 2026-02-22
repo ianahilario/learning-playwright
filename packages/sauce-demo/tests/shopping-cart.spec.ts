@@ -14,10 +14,7 @@ test.describe('Able to add/remove cart items', () => {
 
       await test.step(`go to homepage`, async () => {
         await loginPage.goToLoginPage();
-        await loginPage.submitLogin(
-          `${process.env.USER_USERNAME}`,
-          `${process.env.USER_PASSWORD}`
-        );
+        await loginPage.submitLogin();
         await productListingPage.isCorrectPage();
       });
 
@@ -76,10 +73,7 @@ test.describe('Able to add/remove cart items', () => {
 
       await test.step(`go to homepage`, async () => {
         await loginPage.goToLoginPage();
-        await loginPage.submitLogin(
-          `${process.env.USER_USERNAME}`,
-          `${process.env.USER_PASSWORD}`
-        );
+        await loginPage.submitLogin();
         await productListingPage.isCorrectPage();
       });
 
@@ -151,10 +145,7 @@ test.describe('Able to add/remove cart items', () => {
 
       await test.step(`go to homepage`, async () => {
         await loginPage.goToLoginPage();
-        await loginPage.submitLogin(
-          `${process.env.USER_USERNAME}`,
-          `${process.env.USER_PASSWORD}`
-        );
+        await loginPage.submitLogin();
         await productListingPage.isCorrectPage();
       });
 
@@ -201,10 +192,7 @@ test.describe('Able to add/remove cart items', () => {
 
     await test.step(`go to homepage`, async () => {
       await loginPage.goToLoginPage();
-      await loginPage.submitLogin(
-        `${process.env.USER_USERNAME}`,
-        `${process.env.USER_PASSWORD}`
-      );
+      await loginPage.submitLogin();
       await productListingPage.isCorrectPage();
     });
 
@@ -254,10 +242,7 @@ test(
 
     await test.step(`go to homepage`, async () => {
       await loginPage.goToLoginPage();
-      await loginPage.submitLogin(
-        `${process.env.USER_USERNAME}`,
-        `${process.env.USER_PASSWORD}`
-      );
+      await loginPage.submitLogin();
       await productListingPage.isCorrectPage();
     });
 
@@ -338,10 +323,7 @@ test(
 
     await test.step(`go to homepage`, async () => {
       await loginPage.goToLoginPage();
-      await loginPage.submitLogin(
-        `${process.env.USER_USERNAME}`,
-        `${process.env.USER_PASSWORD}`
-      );
+      await loginPage.submitLogin();
       await productListingPage.isCorrectPage();
     });
 
@@ -367,10 +349,7 @@ test(
     await test.step(`log out then log in again`, async () => {
       await header.goToLogout();
 
-      await loginPage.submitLogin(
-        `${process.env.USER_USERNAME}`,
-        `${process.env.USER_PASSWORD}`
-      );
+      await loginPage.submitLogin();
       await productListingPage.isCorrectPage();
     });
 

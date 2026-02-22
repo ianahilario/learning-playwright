@@ -11,10 +11,7 @@ test(
 
     await test.step(`go to homepage`, async () => {
       await loginPage.goToLoginPage();
-      await loginPage.submitLogin(
-        `${process.env.USER_USERNAME}`,
-        `${process.env.USER_PASSWORD}`
-      );
+      await loginPage.submitLogin();
     });
 
     await test.step(`take note of product details`, async () => {
@@ -41,10 +38,7 @@ test('should be able to go back to Listing page via "Back to products" link"', a
 }) => {
   await test.step(`go to homepage`, async () => {
     await loginPage.goToLoginPage();
-    await loginPage.submitLogin(
-      `${process.env.USER_USERNAME}`,
-      `${process.env.USER_PASSWORD}`
-    );
+    await loginPage.submitLogin();
   });
 
   await test.step(`go to Details page`, async () => {
@@ -64,10 +58,7 @@ test('should show correct sort options and sorts correctly', async ({
   productListingPage
 }) => {
   await loginPage.goToLoginPage();
-  await loginPage.submitLogin(
-    `${process.env.USER_USERNAME}`,
-    `${process.env.USER_PASSWORD}`
-  );
+  await loginPage.submitLogin();
   await productListingPage.isCorrectPage();
 
   await productListingPage.isCorrectSorting('Name (A to Z)');
