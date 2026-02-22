@@ -12,7 +12,7 @@ interface APIRequestData {
   data?: object;
 }
 
-const RETRYABLE_STATUS_CODES = [503, 500, 520];
+const RETRYABLE_STATUS_CODES = [503, 520];
 
 export async function sendAPIRequest(
   apiRequestContext: APIRequestContext,
@@ -61,8 +61,8 @@ export async function sendAPIRequest(
     },
     `sendAPIRequest(): Retry '${apiRequestData.http_method} ${url}' until status is not in ${RETRYABLE_STATUS_CODES.join(', ')}`
   ).toPass({
-    intervals: [5_000],
-    timeout: 60_000
+    intervals: [3_000],
+    timeout: 20_000
   });
 
   return response;

@@ -19,10 +19,8 @@ test('able to get return booking details', async ({ restfulBookerApi }) => {
   expect.soft(responseBody).toHaveProperty('additionalneeds', 'Breakfast');
 });
 
-test('able to handle non-existing booking id', async ({ request }) => {
-  const response = await request.get(
-    `https://restful-booker.herokuapp.com/booking/abc`
-  );
+test('able to handle non-existing booking id', async ({ restfulBookerApi }) => {
+  const response = await restfulBookerApi.bookingDetails.sendRequest('abc');
 
   expect(response.ok()).not.toBeTruthy();
   expect(response.status()).toBe(404);
