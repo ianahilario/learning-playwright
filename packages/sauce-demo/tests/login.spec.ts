@@ -11,7 +11,9 @@ test('should show errror when login fails', async ({ page, loginPage }) => {
   });
 
   await test.step(`submit login credentials`, async () => {
-    await loginPage.submitLogin(user.username, user.password);
+    await loginPage.usernameField.fill(user.username);
+    await loginPage.passwordField.fill(user.password);
+    await loginPage.loginButton.click();
   });
 
   await test.step(`verify that an error is displayed in the page`, async () => {
