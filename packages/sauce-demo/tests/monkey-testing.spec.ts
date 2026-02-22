@@ -39,15 +39,15 @@ test.describe('monkey testing', () => {
     });
   });
 
-  test('homepage', async ({ page, navigation }) => {
+  test('login page', async ({ page, loginPage }) => {
     // Navigate to the test page
-    await navigation.gotoHomepageviaURL();
+    await loginPage.goToLoginPage();
 
     // Execute chaos testing with a 30-second timeout
     await page.evaluate(() => {
       const gremlins = (window as any).gremlins;
       return Promise.race([
-        new Promise((resolve) => {
+        new Promise(() => {
           gremlins
             .createHorde({
               randomizer: new gremlins.Chance(1234),
@@ -59,45 +59,6 @@ test.describe('monkey testing', () => {
                     if (element.tagName === 'a') return false;
                     if (element.classList.contains('figure-caption'))
                       return false;
-                  }
-                }),
-                gremlins.species.formFiller(),
-                gremlins.species.typer(),
-                gremlins.species.scroller()
-              ],
-              mogwais: [
-                gremlins.mogwais.alert(),
-                gremlins.mogwais.fps(),
-                gremlins.mogwais.gizmo()
-              ],
-              delay: 250
-            })
-            .unleash();
-        }),
-        new Promise((resolve) => setTimeout(resolve, 30000)) // 30 seconds timeout
-      ]);
-    });
-
-    expect(errors.length, 'There are 0 errors in the page').toBe(0);
-  });
-
-  test('sign-in page', async ({ page, navigation }) => {
-    await navigation.gotoHomepageviaURL();
-    await navigation.header.gotoLogin();
-
-    await page.evaluate(() => {
-      const gremlins = (window as any).gremlins;
-      return Promise.race([
-        new Promise((resolve) => {
-          gremlins
-            .createHorde({
-              randomizer: new gremlins.Chance(1234),
-              strategies: [gremlins.strategies.allTogether({ nb: 10000 })],
-              species: [
-                gremlins.species.clicker({
-                  clickTypes: ['click'],
-                  canClick: function (element) {
-                    if (element.tagName === 'a') return false;
                   }
                 }),
                 gremlins.species.formFiller(),

@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { test } from '../../../fixtures/api-restful-booker';
+import { test } from '../../fixtures/api-restful-booker';
 
 let requestBody;
 async function createBookingBody() {
