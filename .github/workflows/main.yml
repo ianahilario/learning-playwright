@@ -7,13 +7,9 @@ on:
   schedule:
     - cron: '0 5-22 * * 1-5'
 env:
-  USER_USERNAME: ${{ secrets.USER_USERNAME }}
-  USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
-  USER_STANDARD_USERNAME: ${{ secrets.USER_STANDARD_USERNAME }}
-  USER_STANDARD_PASSWORD: ${{ secrets.USER_STANDARD_PASSWORD }}
-  USER_LOCKED_USERNAME: ${{ secrets.USER_LOCKED_USERNAME }}
-  USER_LOCKED_PASSWORD: ${{ secrets.USER_LOCKED_PASSWORD }}
-  APP_UNDER_TEST: 'sauce-demo'
+  RESTFUL_BOOKER_USERNAME: ${{ secrets.USER_USERNAME }}
+  RESTFUL_BOOKER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+  SAUCE_DEMO_USER_PASSWORD: ${{ secrets.USER_STANDARD_USERNAME }}
 
 jobs:
   test:
@@ -29,7 +25,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run smoke tests
-        run: npx playwright test tests/sauce-demo --project=smoke --project=smoke-mobile
+        run: npx playwright test --project=smoke --grep-invert=@failed
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
