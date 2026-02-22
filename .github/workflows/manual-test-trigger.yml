@@ -10,9 +10,9 @@ on:
           - full
 run-name: Run test-suite=${{ github.event.inputs.test-suite }} by @${{ github.actor }}
 env:
-  RESTFUL_BOOKER_USERNAME: ${{ secrets.USER_USERNAME }}
-  RESTFUL_BOOKER_PASSWORD: ${{ secrets.USER_PASSWORD }}
-  SAUCE_DEMO_USER_PASSWORD: ${{ secrets.USER_STANDARD_USERNAME }}
+  RESTFUL_BOOKER_USERNAME: ${{ secrets.RESTFUL_BOOKER_USERNAME }}
+  RESTFUL_BOOKER_PASSWORD: ${{ secrets.SAUCE_DEMO_USER_PASSWORD }}
+  SAUCE_DEMO_USER_PASSWORD: ${{ secrets.SAUCE_DEMO_USER_PASSWORD }}
 
 jobs:
   test:
