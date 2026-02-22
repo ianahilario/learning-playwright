@@ -86,4 +86,4 @@ learning-playwright/
 ## CI/CD
 
 - **main.yml:** Runs on push/PR to `main` and scheduled runs (Mon–Fri 5–22 UTC)
-- **manual-test-trigger.yml:** Manual run of smoke, full, or visual suite
+- **manual-test-trigger.yml:** Manual run of smoke or full suite
