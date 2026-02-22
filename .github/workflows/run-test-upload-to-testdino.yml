@@ -1,0 +1,38 @@
+name: Manual test trigger
+on:
+  workflow_dispatch:
+    inputs:
+      test-suite:
+        type: choice
+        description: Test suite
+        options:
+          - smoke
+          - full
+run-name: Run test-suite=${{ github.event.inputs.test-suite }} by @${{ github.actor }}
+env:
+  RESTFUL_BOOKER_USERNAME: ${{ secrets.USER_USERNAME }}
+  RESTFUL_BOOKER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+  SAUCE_DEMO_USER_PASSWORD: ${{ secrets.USER_STANDARD_USERNAME }}
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run smoke tests
+        if: ${{ github.event.inputs.test-suite == 'smoke' }}
+        run: npx playwright test --grep=@smoke --grep-invert=@failed
+      - name: Run full tests
+        if: ${{ github.event.inputs.test-suite == 'full' }}
+        run: npx playwright test
+      - name: Upload to TestDino
+        if: always()
+        run: npx tdpw upload ./playwright-report --token="${{ secrets.TESTDINO_TOKEN }}" --upload-html
