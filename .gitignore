@@ -6,3 +6,4 @@ node_modules/
 .env.secret
 .env.runner
 /axe-report
+/.playwright-cli
