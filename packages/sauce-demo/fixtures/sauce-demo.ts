@@ -9,6 +9,7 @@ import { CartCheckoutPage } from '../pom/pages/cart-checkout.page';
 import { CartReviewPage } from '../pom/pages/cart-review.page';
 import { CartConfirmationPage } from '../pom/pages/cart-confirmation.page';
 import AxeBuilder from '@axe-core/playwright';
+import { MonkeyTesting } from '../../../commons/monkey';
 
 interface TestFixtures {
   loginPage: LoginPage;
@@ -20,6 +21,7 @@ interface TestFixtures {
   cartReviewPage: CartReviewPage;
   cartConfirmationPage: CartConfirmationPage;
   axeBuilder: AxeBuilder;
+  monkeyTesting: MonkeyTesting;
 }
 
 export const test = base.extend<TestFixtures>({
@@ -56,6 +58,12 @@ export const test = base.extend<TestFixtures>({
     ]);
 
     await use(makeAxeBuilder);
+  },
+  monkeyTesting: async ({ page }, use) => {
+    await page.addInitScript({
+      path: './node_modules/gremlins.js/dist/gremlins.min.js'
+    });
+    await use(new MonkeyTesting());
   }
 });
 

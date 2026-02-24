@@ -2,7 +2,7 @@ import { Page } from 'playwright';
 import test, { expect } from 'playwright/test';
 
 export class MonkeyTesting {
-  static async releaseMonkey(page: Page) {
+  async releaseMonkey(page: Page, options: { timeout: number }) {
     const errors: [string, string][] = [];
 
     errors.length = 0;
@@ -26,13 +26,12 @@ export class MonkeyTesting {
       ]);
     });
 
-    await page.addInitScript({
-      path: './node_modules/gremlins.js/dist/gremlins.min.js'
-    });
-
     await test.step('Run monkey testing', async () => {
-      await page.evaluate(() => {
+      await page.evaluate((timeout) => {
         const gremlins = (window as any).gremlins;
+        if (!gremlins) {
+          throw new Error('gremlins.js not loaded');
+        }
         return Promise.race([
           new Promise(() => {
             gremlins
@@ -61,11 +60,14 @@ export class MonkeyTesting {
               })
               .unleash();
           }),
-          new Promise((resolve) => setTimeout(resolve, 30000)) // 30 seconds timeout
+          new Promise((resolve) => setTimeout(resolve, timeout))
         ]);
-      });
+      }, options.timeout);
 
-      expect(errors.length, 'There are 0 errors in the page').toBe(0);
+      expect.soft(errors.length, 'There are 0 errors in the page').toBe(0);
+      expect
+        .soft(errors.toString(), 'There are no errors in the page')
+        .toBe('');
     });
   }
 }

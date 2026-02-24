@@ -18,6 +18,7 @@ export class LoginPage {
 
   async goToLoginPage() {
     await this.page.goto('https://www.saucedemo.com/');
+    await waitForPageToLoad(this.page, /saucedemo/, this.usernameField);
   }
 
   async submitLogin(

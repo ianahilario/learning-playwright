@@ -1,10 +1,8 @@
 import { test } from '../fixtures/sauce-demo';
-import { MonkeyTesting } from '../../../commons/monkey';
 
-test.describe('monkey testing', () => {
-  test('login page', async ({ page, loginPage }) => {
-    // Navigate to the test page
-    await loginPage.goToLoginPage();
-    await MonkeyTesting.releaseMonkey(page);
-  });
+test('monkey test login page', async ({ page, loginPage, monkeyTesting }) => {
+  // Navigate to the test page
+  await loginPage.goToLoginPage();
+  // Execute chaos testing with a 30-second timeout
+  await monkeyTesting.releaseMonkey(page, { timeout: 10_000 });
 });
