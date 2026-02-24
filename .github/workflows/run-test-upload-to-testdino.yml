@@ -11,7 +11,7 @@ on:
 run-name: Run test-suite=${{ github.event.inputs.test-suite }} by @${{ github.actor }}
 env:
   RESTFUL_BOOKER_USERNAME: ${{ secrets.RESTFUL_BOOKER_USERNAME }}
-  RESTFUL_BOOKER_PASSWORD: ${{ secrets.SAUCE_DEMO_USER_PASSWORD }}
+  RESTFUL_BOOKER_PASSWORD: ${{ secrets.RESTFUL_BOOKER_PASSWORD }}
   SAUCE_DEMO_USER_PASSWORD: ${{ secrets.SAUCE_DEMO_USER_PASSWORD }}
 
 jobs:
