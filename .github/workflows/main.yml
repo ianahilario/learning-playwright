@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    - cron: '0 5-22 * * 1-5'
+    - cron: '0 2 * * 1-5'
 env:
   RESTFUL_BOOKER_USERNAME: ${{ secrets.RESTFUL_BOOKER_USERNAME }}
   RESTFUL_BOOKER_PASSWORD: ${{ secrets.SAUCE_DEMO_USER_PASSWORD }}
@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
@@ -32,3 +32,7 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+      - name: Upload to TestDino
+        if: always()
+        run: npx tdpw upload ./playwright-report --token="${{ secrets.TESTDINO_TOKEN }}" --upload-html --upload-videos --upload-traces
+
