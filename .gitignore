@@ -8,4 +8,4 @@ node_modules/
 /axe-report
 /.playwright-cli
 .env
-/dogfood-output-sample
+/dogfood-output
