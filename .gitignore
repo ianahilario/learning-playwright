@@ -7,3 +7,5 @@ node_modules/
 .env.runner
 /axe-report
 /.playwright-cli
+.env
+/dogfood-output-sample
