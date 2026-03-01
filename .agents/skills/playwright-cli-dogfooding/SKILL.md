@@ -14,11 +14,11 @@ Always ask the user to confirm the setup before staring.
 
 | Parameter | Default | Example override |
 |-----------|---------|------------------|
-| **Run mode** | `headed` | , `headless` |
-| **Target URL** | `saucedemo.com` | `saucedemo.com`, `http://localhost:3000` |
+| **Run mode** | `headed` | `headless` |
+| **Target URL** | `saucedemo.com` | `http://localhost:3000` |
 | **Session name** | Slugified domain (e.g. `saucedemo.com` → `saucedemo-com`) | Use `-s=my-session` for named session |
 | **Output directory** | `./dogfood-output/` | `Output directory: /tmp/qa` |
-| **Scope** | Full app | `Focus on the billing page` |
+| **Scope** | Full app | `Focus on the checkout page` |
 | **Test Evidence** | screenshot, snapshot | `video` |
 
 **saucedemo login:** Refer to [references/.env](.agents/skills/playwright-cli-dogfood/references/login-instructions.md).
