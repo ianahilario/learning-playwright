@@ -48,7 +48,7 @@ export default defineConfig({
         columns: [
           {
             column_name: 'Name',
-            value: 'test run',
+            value: `Test Run Report`,
             type: 'title'
           }
         ]
