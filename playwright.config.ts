@@ -30,7 +30,30 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ['html', { outputDir: './playwright-report' }],
-    ['json', { outputFile: './playwright-report/test-results.json' }]
+    ['json', { outputFile: './playwright-report/test-results.json' }],
+    [
+      'playwright-notion-reporter',
+      {
+        apiKey: process.env.NOTION_API_KEY!,
+        databaseId: process.env.NOTION_DATABASE_ID!,
+        statusColumns: {
+          passed: 'Passed',
+          failed: 'Failed',
+          skipped: 'Skipped',
+          flaky: 'Flaky',
+          total: 'Total',
+          duration: 'Duration',
+          status: 'Status'
+        },
+        columns: [
+          {
+            column_name: 'Name',
+            value: 'test run',
+            type: 'title'
+          }
+        ]
+      }
+    ]
   ],
   maxFailures: process.env.CI ? 9 : undefined,
   snapshotPathTemplate:
